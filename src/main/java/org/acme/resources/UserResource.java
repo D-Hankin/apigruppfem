@@ -5,6 +5,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.acme.model.User;
 import org.acme.services.UserService;
@@ -12,7 +13,6 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 
 import jakarta.inject.Inject;
-import jakarta.validation.constraints.Min;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.core.MediaType;
@@ -45,10 +45,10 @@ public class UserResource {
     
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("/{userId}")
-    public Response getUserById(@PathParam("id") @Min(1) Long id) {
+    @Path("/{apiKey}")
+    public Response getUserByApiKey(@PathParam("id") UUID apiKey) {
 
-        User user = userService.find(id);
+        User user = userService.find(apiKey);
 
         return Response.ok(user).build();
     }

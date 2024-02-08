@@ -1,6 +1,7 @@
 package org.acme.services;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.acme.model.User;
 
@@ -9,7 +10,6 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.Min;
 
 @Transactional(Transactional.TxType.SUPPORTS)
 @ApplicationScoped
@@ -25,9 +25,9 @@ public class UserService {
         return users;
     }
 
-    public User find(@Min(1) Long id) {
+    public User find(UUID apiKey) {
         
-        return em.find(User.class, id);
+        return em.find(User.class, apiKey);
         
     }
 }
