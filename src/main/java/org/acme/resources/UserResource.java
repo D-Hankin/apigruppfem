@@ -1,6 +1,7 @@
 package org.acme.resources;
 
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 
 import jakarta.inject.Inject;
+import jakarta.validation.constraints.Min;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.core.MediaType;
@@ -41,4 +43,13 @@ public class UserResource {
         return Response.ok(users).build();
     }
     
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/{userId}")
+    public Response getUserById(@PathParam("id") @Min(1) Long id) {
+
+        User user = userService.find(id);
+
+        return Response.ok(user).build();
+    }
 }
