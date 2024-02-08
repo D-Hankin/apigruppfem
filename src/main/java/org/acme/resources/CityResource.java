@@ -2,6 +2,10 @@ package org.acme.resources;
 
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
+
+import org.acme.services.CityService;
+
+import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.core.MediaType;
 
@@ -10,4 +14,6 @@ import jakarta.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 public class CityResource {
     
+    @Inject
+    CityService cityService;
 }
