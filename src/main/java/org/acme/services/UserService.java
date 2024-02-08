@@ -1,6 +1,7 @@
 package org.acme.services;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.acme.model.User;
 
@@ -29,5 +30,12 @@ public class UserService {
         
         return em.find(User.class, id);
         
+    }
+    
+    @Transactional(Transactional.TxType.REQUIRED)
+    public User create(User user) {
+        user.setApiKey(UUID.randomUUID());
+        em.persist(user);
+        return user;
     }
 }

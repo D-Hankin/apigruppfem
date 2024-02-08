@@ -23,4 +23,7 @@ public class CityService {
         List<City> cities = em.createQuery("SELECT c FROM City c", City.class).getResultList();
         return cities;
     }
+    public Long countAll() {
+        return em.createQuery("SELECT COUNT(c) FROM City c", Long.class).getSingleResult(); 
+    }
 }

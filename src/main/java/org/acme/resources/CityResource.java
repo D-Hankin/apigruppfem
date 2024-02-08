@@ -16,7 +16,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-@Path("/api/city/{apiKey}")
+@Path("/api/city")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class CityResource {
@@ -30,7 +30,7 @@ public class CityResource {
         responseCode = "204",
         description = "No cities currently in the database"
     )
-    public Response getUsers() {
+    public Response getCities() {
 
         List<City> cities = cityService.findAll();
 
