@@ -18,7 +18,7 @@ public class City {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cityID;
+    private Long cityId;
 
     @NotEmpty
     private String cityName;
@@ -36,12 +36,12 @@ public class City {
     @NotEmpty
     private String imageUrl;
 
-    public Long getCityID() {
-        return cityID;
+    public Long getCityId() {
+        return cityId;
     }
 
-    public void setCityID(Long cityID) {
-        this.cityID = cityID;
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
     }
 
     public String getCityName() {
@@ -83,7 +83,4 @@ public class City {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-
-    
-
 }
