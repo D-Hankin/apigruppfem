@@ -1,7 +1,6 @@
 package org.acme.services;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.acme.model.City;
 
