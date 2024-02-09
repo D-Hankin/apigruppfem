@@ -10,14 +10,14 @@ insert into t_city (cityName, country, description, population, imageUrl) values
 ('Los Angeles', 'United States', 'Los Angeles is a sprawling Southern California city famed as the center of the nation’s film and television industry.', '3971883', 'http://localhost:8080/images/97897dv74hv.jpg'),
 ('Berlin', 'Germany', 'Berlin, Germany’s capital and cultural center, dates to the 13th century.', '3769495', 'http://localhost:8080/images/vaed79pg4b.jpg'),
 ('Moscow', 'Russia', 'Moscow, on the Moskva River in western Russia, is the nation’s cosmopolitan capital.', '12678079', 'http://localhost:8080/images/svaqs897av.jpg'),
-('Mexico City', 'Mexico', 'Mexico City is the densely populated, high-altitude capital of Mexico.', '9209944', 'https://www.travelandleisure.com/thmb/Z1DZUlN4Q3YMRo59fr-CSA3hVmw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-mexico-city-lead-MEXICOCITYTG01223-99370d83a62f4d87af9a6e44636ebb07.jpg'),
-('Toronto', 'Canada', 'Toronto, the capital of the province of Ontario, is a major Canadian city along Lake Ontario’s northwestern shore.', '2731571', 'https://cdn.britannica.com/93/94493-050-35524FED/Toronto.jpg'),
-('Cairo', 'Egypt', 'Cairo, Egypt''s sprawling capital, is set on the Nile River.', '9119149', 'https://media.cntraveler.com/photos/655cdf1d2d09a7e0b27741b5/16:9/w_2560%2Cc_limit/Cairo%2520Egypt_GettyImages-1370918272.jpg'),
-('Mumbai', 'India', 'Mumbai (formerly called Bombay) is a densely populated city on India’s west coast.', '20411274', 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F7xZ48abwAAgNst.jpg/800px-F7xZ48abwAAgNst.jpg'),
-('Bangkok', 'Thailand', 'Bangkok, Thailand’s capital, is a large city known for ornate shrines and vibrant street life.', '8280925', 'https://a.cdn-hotels.com/gdcs/production172/d459/3af9262b-3d8b-40c6-b61d-e37ae1aa90aa.jpg'),
-('Istanbul', 'Turkey', 'Istanbul is a major city in Turkey that straddles Europe and Asia across the Bosphorus Strait.', '15029231', 'https://a.cdn-hotels.com/gdcs/production6/d781/3bae040b-2afb-4b11-9542-859eeb8ebaf1.jpg'),
-('Seoul', 'South Korea', 'Seoul, the capital of South Korea, is a huge metropolis where modern skyscrapers, high-tech subways, and pop culture meet Buddhist temples, palaces, and street markets.', '9995784', 'https://upload.wikimedia.org/wikipedia/commons/7/7f/%EB%8F%84%EC%8B%9C%EC%99%80%EC%9D%98_%EA%B3%B5%EC%A1%B4.jpg'),
-('Dubai', 'United Arab Emirates', 'Dubai is a city and emirate in the United Arab Emirates known for luxury shopping, ultramodern architecture, and a lively nightlife scene.', '3331000', 'https://www.apollo.se/upload/inspiration/restips/emiraten/uae-dubai-palm-jumeirah-900x600.jpg');
+('Mexico City', 'Mexico', 'Mexico City is the densely populated, high-altitude capital of Mexico.', '9209944', 'http://localhost:8080/images/ffb7f6868fb8.jpg'),
+('Toronto', 'Canada', 'Toronto, the capital of the province of Ontario, is a major Canadian city along Lake Ontario’s northwestern shore.', '2731571', 'http://localhost:8080/images/dbdsb9f679s6f.jpg'),
+('Cairo', 'Egypt', 'Cairo, Egypt''s sprawling capital, is set on the Nile River.', '9119149', 'http://localhost:8080/images/bfb799979fbf.jpg'),
+('Mumbai', 'India', 'Mumbai (formerly called Bombay) is a densely populated city on India’s west coast.', '20411274', 'http://localhost:8080/images/9788rg79549h.jpg'),
+('Bangkok', 'Thailand', 'Bangkok, Thailand’s capital, is a large city known for ornate shrines and vibrant street life.', '8280925', 'http://localhost:8080/images/fvh4ub479bv.jpg'),
+('Istanbul', 'Turkey', 'Istanbul is a major city in Turkey that straddles Europe and Asia across the Bosphorus Strait.', '15029231', 'http://localhost:8080/images/rbh9853hbnm.jpg'),
+('Seoul', 'South Korea', 'Seoul, the capital of South Korea, is a huge metropolis where modern skyscrapers, high-tech subways, and pop culture meet Buddhist temples, palaces, and street markets.', '9995784', 'http://localhost:8080/images/89hgnv24ngn.jpg'),
+('Dubai', 'United Arab Emirates', 'Dubai is a city and emirate in the United Arab Emirates known for luxury shopping, ultramodern architecture, and a lively nightlife scene.', '3331000', 'http://localhost:8080/images/dvjkbawb54hkg54.jpg');
 
 insert into t_user (apiKey,firstName,lastName, email) values 
 ('84dddfe1-9c42-4a50-9fb2-c4d8640468c6','Jacob','Jansson','jacob.jansson@example.com'),
