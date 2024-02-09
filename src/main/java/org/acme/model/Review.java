@@ -22,10 +22,10 @@ public class Review {
     private Long reviewID;
 
     @ManyToOne
-    @JoinColumn(name = "userId", referencedColumnName = "userId", insertable = false, updatable = false)
+    @JoinColumn(name = "apiKey", referencedColumnName = "apiKey", insertable = false, updatable = false)
     private User user;
 
-    private Long userId;
+    private UUID apiKey;
 
     @ManyToOne
     @JoinColumn(name = "cityId", referencedColumnName = "cityId", insertable = false, updatable = false)
@@ -59,12 +59,12 @@ public class Review {
         this.user = user;
     }
 
-    public Long getUserId() {
-        return userId;
+    public UUID getApiKey() {
+        return apiKey;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setApiKey(UUID apiKey) {
+        this.apiKey = apiKey;
     }
 
     public City getCity() {
