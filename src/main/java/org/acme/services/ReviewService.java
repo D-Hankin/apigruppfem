@@ -17,9 +17,7 @@ public class ReviewService {
     
     @Inject
     EntityManager em;
-
-    public List<Review> findAll() {
-        
+    public List<Review> findAll() {    
         List<Review> reviews = em.createQuery("SELECT u FROM User u", Review.class).getResultList();
         return reviews;
     }

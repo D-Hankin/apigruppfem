@@ -18,9 +18,9 @@ insert into t_city (cityName, country, description, population, imageUrl) values
 ('Istanbul', 'Turkey', 'Istanbul is a major city in Turkey that straddles Europe and Asia across the Bosphorus Strait.', '15029231', 'https://a.cdn-hotels.com/gdcs/production6/d781/3bae040b-2afb-4b11-9542-859eeb8ebaf1.jpg'),
 ('Seoul', 'South Korea', 'Seoul, the capital of South Korea, is a huge metropolis where modern skyscrapers, high-tech subways, and pop culture meet Buddhist temples, palaces, and street markets.', '9995784', 'https://upload.wikimedia.org/wikipedia/commons/7/7f/%EB%8F%84%EC%8B%9C%EC%99%80%EC%9D%98_%EA%B3%B5%EC%A1%B4.jpg'),
 ('Dubai', 'United Arab Emirates', 'Dubai is a city and emirate in the United Arab Emirates known for luxury shopping, ultramodern architecture, and a lively nightlife scene.', '3331000', 'https://www.apollo.se/upload/inspiration/restips/emiraten/uae-dubai-palm-jumeirah-900x600.jpg');
+
 insert into t_user (apiKey,firstName,lastName, email) values 
-('84dddfe1-9c42-4a50-9fb2-c4d8640468c6','jacob','jansson','jacobjacob@hej.com'),
-('84dddfe1-9c42-4a50-9fb2-c4d8640468c6','Jacob','Jansson','jacobjacob@hej.com'),
+('84dddfe1-9c42-4a50-9fb2-c4d8640468c6','Jacob','Jansson','jacob.jansson@example.com'),
 ('c86f88c4-ae9a-4be4-ae12-742611db5557','Emma','Andersson','emma.andersson@example.com'),
 ('4a782315-1dc4-4d5b-a6a7-8c63bf27940b','Elias','Nilsson','elias.nilsson@example.com'),
 ('9a52a6da-2f7b-4c14-bc85-399a1e29e29d','Olivia','Larsson','olivia.larsson@example.com'),
@@ -40,3 +40,25 @@ insert into t_user (apiKey,firstName,lastName, email) values
 ('13f233c2-d76a-4324-aa6a-07ad0a55aeaf','Alva','Löfgren','alva.lofgren@example.com'),
 ('1c5cb5b3-18de-4a6d-90d4-8a550f7a32e1','Liam','Isaksson','liam.isaksson@example.com'),
 ('9e50b8c3-7841-4d0e-bcf5-700e1cd02285','Elsa','Björk','elsa.bjork@example.com');
+
+insert into t_review (apiKey, cityId, review, rating) values
+('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', '1', 'A fantastic city with rich history and vibrant culture.', '5'),
+('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', '2', 'Great food scene and friendly locals.', '4'),
+('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', '3', 'Beautiful architecture and stunning landscapes.', '5'),
+('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', '4', 'Unique blend of modernity and tradition.', '4'),
+('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', '5', 'Lively nightlife and cultural events.', '3'),
+('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', '6', 'Friendly people and a welcoming atmosphere.', '5'),
+('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', '7', 'Historical landmarks and a rich heritage.', '4'),
+('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', '8', 'Great place for outdoor activities and adventures.', '4'),
+('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', '9', 'Charming streets and a cozy atmosphere.', '3'),
+('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', '10', 'Diverse cultural experiences and friendly locals.', '5'),
+('c86f88c4-ae9a-4be4-ae12-742611db5557', '11', 'Scenic views and a peaceful environment.', '4'),
+('c86f88c4-ae9a-4be4-ae12-742611db5557', '12', 'Delicious local cuisine and historic sites.', '5'),
+('c86f88c4-ae9a-4be4-ae12-742611db5557', '13', 'Artistic community and cultural festivals.', '3'),
+('c86f88c4-ae9a-4be4-ae12-742611db5557', '14', 'Beautiful beaches and a relaxed atmosphere.', '4'),
+('c86f88c4-ae9a-4be4-ae12-742611db5557', '15', 'Modern infrastructure and efficient public transport.', '3'),
+('c86f88c4-ae9a-4be4-ae12-742611db5557', '16', 'Enchanting landscapes and friendly locals.', '4'),
+('c86f88c4-ae9a-4be4-ae12-742611db5557', '17', 'Unique local traditions and cultural events.', '5'),
+('c86f88c4-ae9a-4be4-ae12-742611db5557', '18', 'Quaint architecture and charming markets.', '3'),
+('c86f88c4-ae9a-4be4-ae12-742611db5557', '19', 'Thriving arts scene and historic landmarks.', '4'),
+('c86f88c4-ae9a-4be4-ae12-742611db5557', '20', 'Dynamic city life and diverse cultural offerings.', '5');
