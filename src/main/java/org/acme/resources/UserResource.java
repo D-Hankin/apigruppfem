@@ -7,15 +7,11 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.UUID;
-
 import org.acme.model.User;
 import org.acme.services.UserService;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
-
 import jakarta.inject.Inject;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -42,18 +38,14 @@ public class UserResource {
       
     )
     public Response getUsers() {
-
         List<User> users = userService.findAll();
-
         if (users.isEmpty()) {
             return Response.noContent().build();
         }
-
         return Response.ok(users).build();
     }
     
     @GET
-
     @Path("/{apiKey}")
     public Response getUserById(@PathParam("apiKey") UUID apiKey) {
         User user = userService.findUserByApiKey(apiKey);

@@ -11,7 +11,6 @@ import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.Min;
 
 @Transactional(Transactional.TxType.SUPPORTS)
 @ApplicationScoped
