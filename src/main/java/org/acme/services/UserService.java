@@ -30,4 +30,11 @@ public class UserService {
         return em.find(User.class, apiKey);
         
     }
+    
+    @Transactional(Transactional.TxType.REQUIRED)
+    public User create(User user) {
+        user.setApiKey(UUID.randomUUID());
+        em.persist(user);
+        return user;
+    }
 }

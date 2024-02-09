@@ -18,7 +18,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-@Path("/api/city/")
+@Path("/api/user")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class UserResource {
@@ -31,6 +31,11 @@ public class UserResource {
     @APIResponse(
         responseCode = "204",
         description = "No user currently in the database"
+    )
+    @APIResponse(
+        responseCode = "200",
+        description = "Funkar detta?!?!"
+      
     )
     public Response getUsers() {
 
