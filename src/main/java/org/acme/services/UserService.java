@@ -9,6 +9,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
@@ -16,7 +17,7 @@ import jakarta.transaction.Transactional;
 @ApplicationScoped
 @Named
 public class UserService {
-    
+
     @Inject
     EntityManager em;
 
@@ -26,7 +27,7 @@ public class UserService {
     }
 
     public User findUserByApiKey(UUID apiKey) {
-        TypedQuery <User> query = em.createQuery("SELECT u FROM User u WHERE u.apiKey = ?1", User.class);
+        TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.apiKey = ?1", User.class);
         query.setParameter(1, apiKey);
         return query.getSingleResult();
     }
@@ -37,4 +38,24 @@ public class UserService {
         em.persist(user);
         return user;
     }
+
+    @Transactional(Transactional.TxType.REQUIRED)
+    public void deleteUserByApiKey(UUID apiKey) {
+
+        Query query = em.createQuery("DELETE FROM User u WHERE u.apiKey = ?1");
+        query.setParameter(1, apiKey);
+        query.executeUpdate();
+    }
+
+    @Transactional(Transactional.TxType.REQUIRED)
+    public void updateUserByApiKey(UUID apiKey, User user) {
+        Query query = em.createQuery(
+                "UPDATE User u SET firstName = :firstName, lastName = :lastName, email = :email WHERE apiKey = ?1");
+        query.setParameter("firstName", user.getFirstName());
+        query.setParameter("lastName", user.getLastName());
+        query.setParameter("email", user.getEmail());
+        query.setParameter(1, apiKey);
+        query.executeUpdate();
+    }
+
 }

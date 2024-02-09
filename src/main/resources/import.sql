@@ -60,5 +60,4 @@ insert into t_review (apiKey, cityId, review, rating) values
 ('c86f88c4-ae9a-4be4-ae12-742611db5557', '16', 'Enchanting landscapes and friendly locals.', '4'),
 ('c86f88c4-ae9a-4be4-ae12-742611db5557', '17', 'Unique local traditions and cultural events.', '5'),
 ('c86f88c4-ae9a-4be4-ae12-742611db5557', '18', 'Quaint architecture and charming markets.', '3'),
-('c86f88c4-ae9a-4be4-ae12-742611db5557', '19', 'Thriving arts scene and historic landmarks.', '4'),
-('c86f88c4-ae9a-4be4-ae12-742611db5557', '20', 'Dynamic city life and diverse cultural offerings.', '5');
+('c86f88c4-ae9a-4be4-ae12-742611db5557', '19', 'Thriving arts scene and historic landmarks.', '4');
