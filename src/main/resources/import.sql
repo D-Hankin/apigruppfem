@@ -18,4 +18,25 @@ insert into t_city (cityName, country, description, population, imageUrl) values
 ('Istanbul', 'Turkey', 'Istanbul is a major city in Turkey that straddles Europe and Asia across the Bosphorus Strait.', '15029231', 'https://a.cdn-hotels.com/gdcs/production6/d781/3bae040b-2afb-4b11-9542-859eeb8ebaf1.jpg'),
 ('Seoul', 'South Korea', 'Seoul, the capital of South Korea, is a huge metropolis where modern skyscrapers, high-tech subways, and pop culture meet Buddhist temples, palaces, and street markets.', '9995784', 'https://upload.wikimedia.org/wikipedia/commons/7/7f/%EB%8F%84%EC%8B%9C%EC%99%80%EC%9D%98_%EA%B3%B5%EC%A1%B4.jpg'),
 ('Dubai', 'United Arab Emirates', 'Dubai is a city and emirate in the United Arab Emirates known for luxury shopping, ultramodern architecture, and a lively nightlife scene.', '3331000', 'https://www.apollo.se/upload/inspiration/restips/emiraten/uae-dubai-palm-jumeirah-900x600.jpg');
-insert into t_user (apiKey,firstName,lastName, email) values ('84dddfe1-9c42-4a50-9fb2-c4d8640468c6','jacob','jansson','jacobjacob@hej.com');
+insert into t_user (apiKey,firstName,lastName, email) values 
+('84dddfe1-9c42-4a50-9fb2-c4d8640468c6','jacob','jansson','jacobjacob@hej.com'),
+('84dddfe1-9c42-4a50-9fb2-c4d8640468c6','Jacob','Jansson','jacobjacob@hej.com'),
+('c86f88c4-ae9a-4be4-ae12-742611db5557','Emma','Andersson','emma.andersson@example.com'),
+('4a782315-1dc4-4d5b-a6a7-8c63bf27940b','Elias','Nilsson','elias.nilsson@example.com'),
+('9a52a6da-2f7b-4c14-bc85-399a1e29e29d','Olivia','Larsson','olivia.larsson@example.com'),
+('eb4e3c59-6d29-4aaf-b20e-02460f5c47ff','Liam','Svensson','liam.svensson@example.com'),
+('2e542206-f00f-41cc-b6d1-0aeb9a86e09e','Alice','Olofsson','alice.olofsson@example.com'),
+('5eac5184-7a10-4155-82e2-8f0d28763e2a','William','Eriksson','william.eriksson@example.com'),
+('8e871ff6-8e1f-4599-9e4d-4e9fb2e30b1a','Astrid','Persson','astrid.persson@example.com'),
+('ff6b5001-64b2-4da1-b1b0-dfd8efb90f02','Lucas','Gustavsson','lucas.gustavsson@example.com'),
+('4e90d3b1-8d61-4a2b-a356-ee1e7d4b8367','Wilma','Johansson','wilma.johansson@example.com'),
+('3b3f1851-30d0-4cf2-98ed-16f298ee8862','Oscar','Karlsson','oscar.karlsson@example.com'),
+('03dd29f7-b5ef-4b3f-b98d-3bb9c27cc72b','Julia','Fredriksson','julia.fredriksson@example.com'),
+('3c5b8c2b-5200-42c0-88f4-d6c62b1861e2','Noah','Berg','noah.berg@example.com'),
+('c3fc505e-2619-44c7-a6aa-4bc2fd896d40','Maja','Lindberg','maja.lindberg@example.com'),
+('b9ac39a7-b5c5-4e96-897e-64d2eb90acdf','Adam','Sjöberg','adam.sjoberg@example.com'),
+('1d665525-61f0-434d-9d45-62f51edc9f0d','Ella','Hansson','ella.hansson@example.com'),
+('a5ef3e7b-fd29-4527-8ba2-d3ab6433ad3b','Hugo','Lundgren','hugo.lundgren@example.com'),
+('13f233c2-d76a-4324-aa6a-07ad0a55aeaf','Alva','Löfgren','alva.lofgren@example.com'),
+('1c5cb5b3-18de-4a6d-90d4-8a550f7a32e1','Liam','Isaksson','liam.isaksson@example.com'),
+('9e50b8c3-7841-4d0e-bcf5-700e1cd02285','Elsa','Björk','elsa.bjork@example.com');
