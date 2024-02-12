@@ -18,7 +18,6 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -63,21 +62,17 @@ public class CityResource {
         description = "Enter cityName, country, description, population and imageUrl(String).\nPopulation values: Min value = 1,000, Max value = 100,000,000"
     )
     public Response createCity(@Valid City city, @PathParam("apiKey") UUID apiKey) throws URISyntaxException {
-
-        if (cityService.findCityByName(city.getCityName()) == false) {
-            if (userService.findUserByApiKey(apiKey) != null) {
-                city.setApiKey(apiKey);
-                city = cityService.createCity(city);
-                URI createdUri = new URI(city.getCityId().toString());
-                return Response.created(createdUri).entity(city).build();
-            } else {
-                return Response.noContent().build();
-            }
-        } else{
+        
+        if (userService.findUserByApiKey(apiKey) != null && cityService.findCityByName(city.getCityName()) == null) {
+            city.setApiKey(apiKey);
+            city = cityService.createCity(city);
+            URI createdUri = new URI(city.getCityId().toString());
+            return Response.created(createdUri).entity(city).build();
+        } else {
             return Response.status(Response.Status.METHOD_NOT_ALLOWED)
-            .entity("This city already exists in the database")
-            .build();
-        }
+        .entity("This city already exists in the database")
+        .build();
+        }       
     }
 
     @DELETE

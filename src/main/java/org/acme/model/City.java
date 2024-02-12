@@ -28,21 +28,20 @@ public class City {
     
     private UUID apiKey;
 
-    @NotEmpty
+    @NotEmpty(message = "CityName must not be empty")
     private String cityName;
 
-    
-    @NotEmpty
+    @NotEmpty(message = "Country must not be empty")
     private String country;
     
-    @NotEmpty
+    @NotEmpty(message = "Description must not be empty")
     private String description;
     
     @Min(value = 1000, message = "Value must be at least 1000")
     @Max(value = 100000000, message = "value must be less than 100,000,000")
     private int population;
     
-    @NotEmpty
+    @NotEmpty(message = "Image URL must not be empty")
     private String imageUrl;
     
     public User getUser() {

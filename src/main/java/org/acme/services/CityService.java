@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.acme.model.City;
-import org.acme.model.User;
 
-import io.quarkus.security.UnauthorizedException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -23,6 +21,7 @@ public class CityService {
     
     @Inject
     EntityManager em;
+
     public List<City> findAll() {
         List<City> cities = em.createQuery("SELECT c FROM City c", City.class).getResultList();
         return cities;
@@ -42,6 +41,7 @@ public class CityService {
     public void delete(Long id) {
         em.remove(em.getReference(City.class, id));
     }
+
     @Transactional(Transactional.TxType.REQUIRED)
     public void updateCityByApiKey(City city, UUID apiKey) {
         Query query = em.createQuery(
@@ -83,16 +83,16 @@ public class CityService {
             query.executeUpdate();
         }
 
-    public Boolean findCityByName(String cityName) {
+    public City findCityByName(String cityName) {
 
         try {
-            Query query = em.createQuery("SELECT c FROM City c WHERE c.cityName = ?1");
+            TypedQuery<City> query = em.createQuery("SELECT c FROM City c WHERE c.cityName = ?1", City.class);
             query.setParameter(1, cityName);
-            System.out.println("fel fgel fel");
-            return false;
+
+            return query.getSingleResult();
+
         } catch (NoResultException e) {
-            System.out.println("rätt rätt");
-            return true;
+            return null;
         }
     }
 }

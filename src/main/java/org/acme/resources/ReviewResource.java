@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.acme.model.Review;
-import org.acme.model.User;
 import org.acme.services.ReviewService;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
@@ -28,10 +27,10 @@ public class ReviewResource {
     ReviewService reviewService;
 
     @GET
-    @Operation(summary = "Show all the current reviews", description = "Retrieve and show all the reviews currently in the database.")
+    @Operation(summary = "Show all the current reviews for a user", description = "Retrieve and show all the reviews currently in the database connected to a specific api key.")
     @APIResponse(
         responseCode = "204",
-        description = "No reviews currently in the database"
+        description = "No reviews currently in the database connected to that api key."
     )
     public Response getReviews(@PathParam("apiKey") UUID apiKey) {
 
