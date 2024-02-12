@@ -2,6 +2,7 @@
     create table t_city (
         population integer not null,
         cityId bigserial not null,
+        apiKey uuid,
         cityName varchar(255),
         country varchar(255),
         description varchar(255),
@@ -26,6 +27,11 @@
         lastName varchar(255),
         primary key (userId)
     );
+
+    alter table if exists t_city 
+       add constraint FKnmyuhlka2j25tagqkxofmp4ui 
+       foreign key (apiKey) 
+       references t_user (apiKey);
 
     alter table if exists t_review 
        add constraint FK949c779wyl8qdjh7ked94ljyj 

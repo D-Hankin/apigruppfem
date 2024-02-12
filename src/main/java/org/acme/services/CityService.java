@@ -1,13 +1,17 @@
 package org.acme.services;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.acme.model.City;
+import org.acme.model.User;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
 @Transactional(Transactional.TxType.SUPPORTS)
@@ -36,6 +40,25 @@ public class CityService {
     public void delete(Long id) {
         em.remove(em.getReference(City.class, id));
     }
+     @Transactional(Transactional.TxType.REQUIRED)
+    public void updateCityByApiKey(City city, UUID apiKey) {
+        Query query = em.createQuery(
+                "UPDATE City c SET cityName = :cityName, country = :country, description = :description, imageUrl = :imageUrl, population = :population WHERE apiKey = ?1");
+        query.setParameter("cityName", city.getCityName());
+        query.setParameter("country", city.getCountry());
+        query.setParameter("description", city.getDescription());
+        query.setParameter("imageUrl", city.getImageUrl());
+        query.setParameter("population", city.getPopulation());
+        query.setParameter(1, apiKey);
+        query.executeUpdate();
+    }
+    public City findCityByApiKey(UUID apiKey) {
+        TypedQuery<City> query = em.createQuery("SELECT c FROM City c WHERE c.apiKey = ?1", City.class);
+        query.setParameter(1, apiKey);
+        return query.getSingleResult();
+    }
+
+
 
     // @Transactional(Transactional.TxType.REQUIRED)
     // public void update(City city) {

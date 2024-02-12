@@ -7,12 +7,15 @@ import jakarta.ws.rs.Produces;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.UUID;
 
 import org.acme.model.City;
 import org.acme.services.CityService;
 import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 
+import io.vertx.mutiny.ext.auth.User;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -56,7 +59,7 @@ public class CityResource {
         summary = "Create a city",
         description = "Enter cityName, country, description, population and imageUrl(String).\nPopulation values: Min value = 1,000, Max value = 100,000,000"
     )
-    public Response createCity(@Valid City city) throws URISyntaxException {
+    public Response createCity(@Valid City city, @PathParam("apiKey") UUID apiKey) throws URISyntaxException {
         city = cityService.create(city);
         URI createdUri = new URI(city.getCityId().toString());
         return Response.created(createdUri).entity(city).build();
@@ -73,12 +76,12 @@ public class CityResource {
         return Response.noContent().build();
     }
 
-    // @PATCH
-    // @Path("/{id}")
-    // public Response updateCity(@PathParam("cityName") City city) {
-    //     cityService.update(city.setCityName(City));
-    //     return Response.accepted(city).entity(cityService).build();
-    // }
+    @PATCH
+    @Path("/{apiKey}/{id}")
+    public void updateCity(@RequestBody City city, @RequestBody UUID apiKey) {
+        cityService.findCityByApiKey(apiKey);
+        cityService.updateCityByApiKey(city, apiKey);
+    }
 }
                                 
 
