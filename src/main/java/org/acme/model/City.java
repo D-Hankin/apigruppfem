@@ -1,9 +1,13 @@
 package org.acme.model;
 
+import java.util.UUID;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -13,12 +17,21 @@ import jakarta.validation.constraints.NotEmpty;
 @Table(name = "t_city")
 public class City {
     
+    @ManyToOne
+    @JoinColumn(name = "apiKey", referencedColumnName = "apiKey", insertable = false, updatable = false)
+    private User user;
+    private UUID apiKey;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cityId;
 
     @NotEmpty
     private String cityName;
+
+    public UUID getApiKey() {
+        return apiKey;
+    }
 
     @NotEmpty
     private String country;
@@ -32,6 +45,18 @@ public class City {
 
     @NotEmpty
     private String imageUrl;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setApiKey(UUID apiKey) {
+        this.apiKey = apiKey;
+    }
 
     public Long getCityId() {
         return cityId;

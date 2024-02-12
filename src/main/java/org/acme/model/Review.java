@@ -24,7 +24,6 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "apiKey", referencedColumnName = "apiKey", insertable = false, updatable = false)
     private User user;
-
     private UUID apiKey;
 
     @ManyToOne
