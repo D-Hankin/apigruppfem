@@ -27,7 +27,7 @@ public class City {
     private User user;
     
     private UUID apiKey;
-
+    
     @NotEmpty(message = "CityName must not be empty")
     private String cityName;
 
@@ -59,11 +59,11 @@ public class City {
     public void setApiKey(UUID apiKey) {
         this.apiKey = apiKey;
     }
-
+    
     public Long getCityId() {
         return cityId;
     }
-
+    
     public void setCityId(Long cityId) {
         this.cityId = cityId;
     }
@@ -71,7 +71,7 @@ public class City {
     public String getCityName() {
         return cityName;
     }
-
+    
     public void setCityName(String cityName) {
         this.cityName = cityName;
     }
@@ -103,7 +103,7 @@ public class City {
     public String getImageUrl() {
         return imageUrl;
     }
-
+    
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
