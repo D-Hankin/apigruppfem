@@ -6,10 +6,12 @@ import java.util.UUID;
 import org.acme.model.City;
 import org.acme.model.User;
 
+import io.quarkus.security.UnauthorizedException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
@@ -31,7 +33,7 @@ public class CityService {
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
-    public City create(City city) {
+    public City createCity(City city) {
         em.persist(city);
         return city;
     }
@@ -40,29 +42,57 @@ public class CityService {
     public void delete(Long id) {
         em.remove(em.getReference(City.class, id));
     }
-     @Transactional(Transactional.TxType.REQUIRED)
+    @Transactional(Transactional.TxType.REQUIRED)
     public void updateCityByApiKey(City city, UUID apiKey) {
         Query query = em.createQuery(
-                "UPDATE City c SET cityName = :cityName, country = :country, description = :description, imageUrl = :imageUrl, population = :population WHERE apiKey = ?1");
+                "UPDATE City c SET cityName = :cityName, country = :country, description = :description, imageUrl = :imageUrl, population = :population WHERE apiKey = ?1 AND cityName = ?2");
         query.setParameter("cityName", city.getCityName());
         query.setParameter("country", city.getCountry());
         query.setParameter("description", city.getDescription());
         query.setParameter("imageUrl", city.getImageUrl());
         query.setParameter("population", city.getPopulation());
         query.setParameter(1, apiKey);
+        query.setParameter(2, city.getCityName());
         query.executeUpdate();
     }
-    public City findCityByApiKey(UUID apiKey) {
-        TypedQuery<City> query = em.createQuery("SELECT c FROM City c WHERE c.apiKey = ?1", City.class);
-        query.setParameter(1, apiKey);
-        return query.getSingleResult();
+
+    @SuppressWarnings("unchecked")
+    public List<City> findCityByApiKey(UUID apiKey) {
+        System.out.println("here: " + apiKey);
+        Query query = em.createQuery("SELECT c FROM City c WHERE c.apiKey = :apiKey");
+        query.setParameter("apiKey", apiKey);
+        
+        return query.getResultList();
     }
 
+    public City findCityByApiKeyAndCityName(String cityName, UUID apiKey) {
 
+        TypedQuery<City> query = em.createQuery("SELECT c FROM City c WHERE c.apiKey = ?1 AND c.cityName = ?2", City.class);
+        query.setParameter(1, apiKey);
+        query.setParameter(2, cityName);
 
-    // @Transactional(Transactional.TxType.REQUIRED)
-    // public void update(City city) {
-    //     em.refresh(city);
-    // }
-    //hejehej
+        return query.getSingleResult();
+    }
+    
+    @Transactional(Transactional.TxType.REQUIRED)
+    public void deleteByApiKey(UUID apiKey, String cityName) {
+    
+            Query query = em.createQuery("DELETE FROM City c WHERE c.apiKey = ?1 AND c.cityName = ?2");
+            query.setParameter(1, apiKey);
+            query.setParameter(2, cityName);
+            query.executeUpdate();
+        }
+
+    public Boolean findCityByName(String cityName) {
+
+        try {
+            Query query = em.createQuery("SELECT c FROM City c WHERE c.cityName = ?1");
+            query.setParameter(1, cityName);
+            System.out.println("fel fgel fel");
+            return false;
+        } catch (NoResultException e) {
+            System.out.println("rätt rätt");
+            return true;
+        }
+    }
 }

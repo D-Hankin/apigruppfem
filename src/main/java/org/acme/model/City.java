@@ -17,43 +17,46 @@ import jakarta.validation.constraints.NotEmpty;
 @Table(name = "t_city")
 public class City {
     
-    @ManyToOne
-    @JoinColumn(name = "apiKey", referencedColumnName = "apiKey", insertable = false, updatable = false)
-    private User user;
-    private UUID apiKey;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cityId;
+    
+    @ManyToOne
+    @JoinColumn(name = "apiKey", referencedColumnName = "apiKey", insertable = false, updatable = false)
+    private User user;
+    
+    private UUID apiKey;
 
     @NotEmpty
     private String cityName;
 
-    public UUID getApiKey() {
-        return apiKey;
-    }
-
+    
     @NotEmpty
     private String country;
-
+    
     @NotEmpty
     private String description;
-
+    
     @Min(value = 1000, message = "Value must be at least 1000")
     @Max(value = 100000000, message = "value must be less than 100,000,000")
     private int population;
-
+    
     @NotEmpty
     private String imageUrl;
-
+    
     public User getUser() {
         return user;
     }
-
+    
     public void setUser(User user) {
         this.user = user;
     }
-
+    
+    public UUID getApiKey() {
+        return apiKey;
+    }
+    
     public void setApiKey(UUID apiKey) {
         this.apiKey = apiKey;
     }

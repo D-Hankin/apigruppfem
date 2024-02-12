@@ -11,11 +11,11 @@ import java.util.UUID;
 
 import org.acme.model.City;
 import org.acme.services.CityService;
+import org.acme.services.UserService;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 
-import io.vertx.mutiny.ext.auth.User;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -27,13 +27,16 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-@Path("/api/city")
+@Path("/api/city/{apiKey}")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class CityResource {
-    
+
     @Inject
     CityService cityService;
+
+    @Inject
+    UserService userService;
 
     @GET
     @Operation
@@ -60,9 +63,21 @@ public class CityResource {
         description = "Enter cityName, country, description, population and imageUrl(String).\nPopulation values: Min value = 1,000, Max value = 100,000,000"
     )
     public Response createCity(@Valid City city, @PathParam("apiKey") UUID apiKey) throws URISyntaxException {
-        city = cityService.create(city);
-        URI createdUri = new URI(city.getCityId().toString());
-        return Response.created(createdUri).entity(city).build();
+
+        if (cityService.findCityByName(city.getCityName()) == false) {
+            if (userService.findUserByApiKey(apiKey) != null) {
+                city.setApiKey(apiKey);
+                city = cityService.createCity(city);
+                URI createdUri = new URI(city.getCityId().toString());
+                return Response.created(createdUri).entity(city).build();
+            } else {
+                return Response.noContent().build();
+            }
+        } else{
+            return Response.status(Response.Status.METHOD_NOT_ALLOWED)
+            .entity("This city already exists in the database")
+            .build();
+        }
     }
 
     @DELETE
@@ -70,18 +85,34 @@ public class CityResource {
         summary = "Delete a city",
         description = "Enter cityId & apiKey to delete a city"
     )
-    @Path("/{id}")
-    public Response deleteCity(@PathParam("id")@Min(1)Long id) {
-        cityService.delete(id);
+    @Path("/{cityName}")
+    public Response deleteCity(@PathParam("apiKey") UUID apiKey, @PathParam("cityName") String cityName) {
+        cityService.deleteByApiKey(apiKey, cityName);
         return Response.noContent().build();
     }
 
     @PATCH
-    @Path("/{apiKey}/{id}")
-    public void updateCity(@RequestBody City city, @RequestBody UUID apiKey) {
-        cityService.findCityByApiKey(apiKey);
+    public City updateCity(@RequestBody City city, @PathParam("apiKey") UUID apiKey) {
         cityService.updateCityByApiKey(city, apiKey);
+
+        return cityService.findCityByApiKeyAndCityName(city.getCityName(), apiKey);
     }
+
+    @GET 
+    @Path("/{cityName}")
+    public City findSingleCity(@PathParam("apiKey") UUID apiKey, @PathParam("cityName") String cityName) {
+
+        return cityService.findCityByApiKeyAndCityName(cityName, apiKey);
+    }
+
+    @GET
+    @Path("/my-cities")
+    public List<City> findMyCities(@PathParam("apiKey") UUID apiKey) {
+
+        return cityService.findCityByApiKey(apiKey);
+    }
+
+
 }
                                 
 

@@ -18,7 +18,7 @@ public class ReviewService {
     
     @Inject
     EntityManager em;
-    public List<Review> getReviewByUserId(UUID apiKey) {    
+    public List<Review> getReviewByApiKey(UUID apiKey) {    
         List<Review> reviews = em.createQuery("SELECT r FROM Review r WHERE u.apiKey = ?1", Review.class).getResultList();
         return reviews;
     }
