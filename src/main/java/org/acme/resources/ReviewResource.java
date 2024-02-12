@@ -1,11 +1,14 @@
 package org.acme.resources;
 
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.acme.model.Review;
+import org.acme.model.User;
 import org.acme.services.ReviewService;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
@@ -30,9 +33,9 @@ public class ReviewResource {
         responseCode = "204",
         description = "No reviews currently in the database"
     )
-    public Response getUsers() {
+    public Response getReviews() {
 
-        List<Review> reviews = reviewService.findAll();
+        List<Review> reviews = reviewService.getReviewByUserId();
 
         if (reviews.isEmpty()) {
             return Response.noContent().build();
@@ -40,5 +43,4 @@ public class ReviewResource {
 
         return Response.ok(reviews).build();
     }
-    
 }

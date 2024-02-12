@@ -26,8 +26,8 @@ public class City {
     @NotEmpty
     private String description;
 
-    @Min(value = 10, message = "Value must be at least 10")
-    @Max(value = 20000000, message = "value must be less than 20,000,000")
+    @Min(value = 1000, message = "Value must be at least 1000")
+    @Max(value = 100000000, message = "value must be less than 100,000,000")
     private int population;
 
     @NotEmpty

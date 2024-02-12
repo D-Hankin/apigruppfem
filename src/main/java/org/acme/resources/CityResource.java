@@ -33,7 +33,9 @@ public class CityResource {
     CityService cityService;
 
     @GET
-    @Operation(summary = "Show all the current cities", description = "Retrieve and show all the cities currently in the database.")
+    @Operation
+        (summary = "Show all the current cities",
+        description = "Retrieve and show all the cities currently in the database.")
     @APIResponse(
         responseCode = "204",
         description = "No cities currently in the database"
@@ -50,6 +52,10 @@ public class CityResource {
     }
     
     @POST
+    @Operation(
+        summary = "Create a city",
+        description = "Enter cityName, country, description, population and imageUrl(String).\nPopulation values: Min value = 1,000, Max value = 100,000,000"
+    )
     public Response createCity(@Valid City city) throws URISyntaxException {
         city = cityService.create(city);
         URI createdUri = new URI(city.getCityId().toString());
@@ -57,6 +63,10 @@ public class CityResource {
     }
 
     @DELETE
+    @Operation(
+        summary = "Delete a city",
+        description = "Enter cityId & apiKey to delete a city"
+    )
     @Path("/{id}")
     public Response deleteCity(@PathParam("id")@Min(1)Long id) {
         cityService.delete(id);

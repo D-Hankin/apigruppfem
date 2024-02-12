@@ -1,6 +1,7 @@
 package org.acme.services;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.acme.model.Review;
 
@@ -17,8 +18,8 @@ public class ReviewService {
     
     @Inject
     EntityManager em;
-    public List<Review> findAll() {    
-        List<Review> reviews = em.createQuery("SELECT u FROM User u", Review.class).getResultList();
+    public List<Review> getReviewByUserId(UUID apiKey) {    
+        List<Review> reviews = em.createQuery("SELECT r FROM Review r WHERE u.apiKey = ?1", Review.class).getResultList();
         return reviews;
     }
 }
