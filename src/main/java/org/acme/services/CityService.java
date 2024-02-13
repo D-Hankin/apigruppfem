@@ -150,4 +150,15 @@ public class CityService {
             return null;
         }
     }
+
+    @SuppressWarnings("unchecked")
+    public List<City> randomCity(UUID apiKey) {
+     if (userService.findUserByApiKey(apiKey) != null) {
+            
+            return em.createQuery("SELECT c FROM City c ORDER BY RANDOM() LIMIT 1").getResultList(); 
+
+        } else {
+            return null;
+        }
+}
 }
