@@ -27,6 +27,10 @@ public class CityService {
 
     public List<City> findAll() {
         List<City> cities = em.createQuery("SELECT c FROM City c", City.class).getResultList();
+        for (City city : cities) {
+            city.getUser().setApiKey(null);
+            city.setApiKey(null);
+        }
         return cities;
     }
 
