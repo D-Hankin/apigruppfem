@@ -85,6 +85,14 @@ public class CityService {
     
     @Transactional(Transactional.TxType.REQUIRED)
     public void deleteByApiKey(UUID apiKey, String cityName) {
+
+            Query selectQuery = em.createQuery("SELECT c FROM City c WHERE c.cityName = :cityName");
+            selectQuery.setParameter("cityName", cityName);
+            City city = (City) selectQuery.getSingleResult();
+
+            Query deleteQuery = em.createQuery("DELETE FROM Review r WHERE r.cityId = :cityId");
+            deleteQuery.setParameter("cityId", city.getCityId());
+            deleteQuery.executeUpdate();
     
             Query query = em.createQuery("DELETE FROM City c WHERE c.apiKey = ?1 AND c.cityName = ?2");
             query.setParameter(1, apiKey);
