@@ -32,12 +32,11 @@ public class Review {
 
     private Long cityId;
 
-    @NotEmpty
-    @Min(value = 1, message = "The review can not be empty.")
+    @NotEmpty(message = "The review field must not be empty")
     @Max(value = 200, message = "The review can't be more than 200 characters.")
     private String review;
 
-    @NotEmpty
+    @NotEmpty(message = "A rating is required.")
     @Min(value = 1, message = "Rating must be at least 1")
     @Max(value = 5, message = "Rating must be less than 5")
     private int rating;
