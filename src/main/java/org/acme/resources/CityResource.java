@@ -137,14 +137,23 @@ public class CityResource {
         try {
             return Response.ok(cityService.seeAllCountries(apiKey)).build();
         } catch (Exception e) {
-            System.out.println("");
             return Response.status(Response.Status.METHOD_NOT_ALLOWED)
         .entity("You need an API key to see this information.")
         .build();
         }
     }
 
-
+    @GET
+    @Path("/most-populace-cities")
+    public Response mostPopulaceCities(@PathParam("apiKey") UUID apiKey) {
+        try {
+            return Response.ok(cityService.mostPopulaceCities(apiKey)).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.METHOD_NOT_ALLOWED)
+        .entity("You need an API key to see this information.")
+        .build();
+        }
+    }
 }
                                 
 

@@ -128,4 +128,15 @@ public class CityService {
         }
         
     }
+
+    @SuppressWarnings("unchecked")
+    public List<City> mostPopulaceCities(UUID apiKey) {
+        if (userService.findUserByApiKey(apiKey) != null) {
+            
+            return em.createQuery("SELECT c FROM City c ORDER BY c.population DESC LIMIT 10").getResultList(); 
+
+        } else {
+            return null;
+        }
+    }
 }
