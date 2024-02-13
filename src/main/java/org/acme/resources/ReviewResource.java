@@ -10,11 +10,13 @@ import java.util.UUID;
 import org.acme.model.Review;
 import org.acme.services.ReviewService;
 import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
@@ -41,5 +43,19 @@ public class ReviewResource {
         }
 
         return Response.ok(reviews).build();
+    }
+
+    @POST
+    @Path("/submit-review")
+    public Response submitReview (@PathParam("apiKey") UUID apiKey, @RequestBody Review review) {
+        if (reviewService.createNewReview(apiKey, review) != null) {
+            return Response.ok(review).build();
+        }else{
+            return Response.status(Response.Status.METHOD_NOT_ALLOWED)
+        .entity("Invalid APIKEY")
+        .build();
+
+
+        }
     }
 }

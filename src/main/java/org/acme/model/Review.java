@@ -2,6 +2,7 @@ package org.acme.model;
 
 import java.util.UUID;
 
+import io.smallrye.common.constraint.NotNull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,6 +13,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "t_review")
@@ -33,10 +35,12 @@ public class Review {
     private Long cityId;
 
     @NotEmpty(message = "The review field must not be empty")
-    @Max(value = 200, message = "The review can't be more than 200 characters.")
+    // @Min(value = 1, message = "The review cant be less then 1 characters")
+    // @Max(value = 200, message = "The review can't be more than 200 characters.")
+    @Size(min = 1, max = 200, message = "The review must be between 1-200 characters.")
     private String review;
 
-    @NotEmpty(message = "A rating is required.")
+    @NotNull
     @Min(value = 1, message = "Rating must be at least 1")
     @Max(value = 5, message = "Rating must be less than 5")
     private int rating;
