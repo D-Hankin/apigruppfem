@@ -107,6 +107,43 @@ public class CityResource {
         return cityService.findCityByApiKey(apiKey);
     }
 
+    @GET
+    @Path("/number-of-cities")
+    public String cityCount(@PathParam("apiKey") UUID apiKey) {
+        
+        try {
+            return Long.toString(cityService.countAllCities(apiKey));
+        } catch (Exception e) {
+            System.out.println("");
+            return "You need a valid API key to see this information.";
+        }
+    }
+
+    @GET
+    @Path("/number-of-countries")
+    public String countryCount(@PathParam("apiKey") UUID apiKey) {
+        
+        try {
+            return Long.toString(cityService.countAllCountries(apiKey));
+        } catch (Exception e) {
+            return "You need a valid API key to see this information.";
+        }
+    }
+
+    @GET
+    @Path("/list-all-countries")
+    public Response listOfCountries(@PathParam("apiKey") UUID apiKey) {
+        
+        try {
+            return Response.ok(cityService.seeAllCountries(apiKey)).build();
+        } catch (Exception e) {
+            System.out.println("");
+            return Response.status(Response.Status.METHOD_NOT_ALLOWED)
+        .entity("You need an API key to see this information.")
+        .build();
+        }
+    }
+
 
 }
                                 

@@ -22,13 +22,22 @@ public class CityService {
     @Inject
     EntityManager em;
 
+    @Inject
+    UserService userService;
+
     public List<City> findAll() {
         List<City> cities = em.createQuery("SELECT c FROM City c", City.class).getResultList();
         return cities;
     }
 
-    public Long countAll() {
-        return em.createQuery("SELECT COUNT(c) FROM City c", Long.class).getSingleResult(); 
+    public Long countAllCities(UUID apiKey) {
+
+            if (userService.findUserByApiKey(apiKey) != null) {
+                return em.createQuery("SELECT COUNT(c) FROM City c", Long.class).getSingleResult(); 
+
+            } else {
+                return null;
+            }
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
@@ -94,5 +103,29 @@ public class CityService {
         } catch (NoResultException e) {
             return null;
         }
+    }
+
+    public Long countAllCountries(UUID apiKey) {
+        
+        if (userService.findUserByApiKey(apiKey) != null) {
+            
+            return em.createQuery("SELECT COUNT(DISTINCT country) FROM City c", Long.class).getSingleResult(); 
+
+        } else {
+            return null;
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<String> seeAllCountries(UUID apiKey) {
+        
+        if (userService.findUserByApiKey(apiKey) != null) {
+            
+            return em.createQuery("SELECT DISTINCT country FROM City c").getResultList(); 
+
+        } else {
+            return null;
+        }
+        
     }
 }
