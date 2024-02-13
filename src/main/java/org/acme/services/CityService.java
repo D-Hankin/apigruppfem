@@ -139,4 +139,15 @@ public class CityService {
             return null;
         }
     }
+
+    @SuppressWarnings("unchecked")
+    public List<City> leastPopulaceCities(UUID apiKey) {
+        if (userService.findUserByApiKey(apiKey) != null) {
+            
+            return em.createQuery("SELECT c FROM City c ORDER BY c.population LIMIT 10").getResultList(); 
+
+        } else {
+            return null;
+        }
+    }
 }

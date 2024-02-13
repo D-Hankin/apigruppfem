@@ -154,6 +154,19 @@ public class CityResource {
         .build();
         }
     }
+
+    @GET
+    @Path("/least-populace-cities")
+    public Response leastPopulaceCities(@PathParam("apiKey") UUID apiKey) {
+        try {
+            return Response.ok(cityService.leastPopulaceCities(apiKey)).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.METHOD_NOT_ALLOWED)
+        .entity("You need an API key to see this information.")
+        .build();
+        }
+    }
 }
+
                                 
 
