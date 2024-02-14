@@ -166,18 +166,18 @@ public class CityResource {
         .build();
         }
     }
-
-        @GET
-        @Path("/random-city")
-        public Response randomCity(@PathParam("apiKey") UUID apiKey) {
-         try {
+    
+    @GET
+    @Path("/random-city")
+    public Response randomCity(@PathParam("apiKey") UUID apiKey) {
+        try {
             return Response.ok(cityService.randomCity(apiKey)).build();
         } catch (Exception e) {
             return Response.status(Response.Status.METHOD_NOT_ALLOWED)
         .entity("You need an API key to see this information.")
         .build();
         }
-}
+    }
 }
 
                                 

@@ -60,7 +60,7 @@ public class UserResource {
         summary = "Create a user",
         description = "Enter firstName, lastName and email"
     )
-    @Path("/create")
+    @Path("/create-user")
     public Response createUser(@Valid User user) throws URISyntaxException {
         user = userService.createNewUser(user);
         URI createdUri = new URI(user.getUserId().toString());
