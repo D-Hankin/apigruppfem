@@ -19,7 +19,7 @@ public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reviewID;
+    private Long reviewId;
 
     @ManyToOne
     @JoinColumn(name = "apiKey", referencedColumnName = "apiKey", insertable = false, updatable = false)
@@ -42,12 +42,12 @@ public class Review {
     @Max(value = 5, message = "Rating must be less than 5")
     private int rating;
 
-    public Long getReviewID() {
-        return reviewID;
+    public Long getReviewId() {
+        return reviewId;
     }
 
-    public void setReviewID(Long reviewID) {
-        this.reviewID = reviewID;
+    public void setReviewId(Long reviewId) {
+        this.reviewId = reviewId;
     }
 
     public User getUser() {

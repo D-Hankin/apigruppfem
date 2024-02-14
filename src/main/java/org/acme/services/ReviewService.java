@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.acme.model.City;
 import org.acme.model.Review;
+import org.jboss.resteasy.spi.UnhandledException;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -59,6 +60,7 @@ public class ReviewService {
         deleteQuery.executeUpdate();
     }
 
+    @SuppressWarnings("unchecked")
     public List<Review> reviewsByRating(UUID apiKey, String cityName, int rating) {
         try {
             Query selectQuery = em.createQuery("SELECT c FROM City c WHERE c.cityName = :cityName");
@@ -84,5 +86,32 @@ public class ReviewService {
         } catch (NoResultException e) {
             return null;
         }
+    }
+
+    @Transactional(Transactional.TxType.REQUIRED)
+    public boolean deleteSingleReviewByReviewId(UUID apiKey, Long reviewId) {
+        
+        boolean success = false;
+
+        Review review = findReviewByReviewId(reviewId);
+
+        try {
+            if (userService.findUserByApiKey(apiKey) == review.getUser() && userService.findUserByApiKey(apiKey).getAccountActive() == 1) {
+                em.createQuery("DELETE FROM Review r WHERE r.reviewId = :reviewId AND r.apiKey = :apiKey").setParameter("reviewId", reviewId)
+                    .setParameter("apiKey", apiKey).executeUpdate();
+                success = true;
+                System.out.println(success);
+            } 
+        } catch (UnhandledException e) {
+            return success;
+        }
+        return success;
+    }
+
+    private Review findReviewByReviewId(Long reviewId) {
+        
+        Review review = (Review) em.createQuery("SELECT r FROM Review r WHERE r.reviewId = :reviewId").setParameter("reviewId", reviewId).getSingleResult();
+        
+        return review;
     }
 }
