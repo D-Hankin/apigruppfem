@@ -2,19 +2,16 @@ package org.acme.model;
 
 import java.util.UUID;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "t_user", uniqueConstraints = @UniqueConstraint(columnNames = { "apiKey" }))
@@ -36,6 +33,9 @@ public class User {
     @NotEmpty
     @Email
     private String email;
+
+    @NotNull
+    private int accountActive;
 
     public Long getUserId() {
         return userId;
@@ -75,6 +75,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getAccountActive() {
+        return accountActive;
+    }
+
+    public void setAccountActive(int accountActive) {
+        this.accountActive = accountActive;
     }
 
 }

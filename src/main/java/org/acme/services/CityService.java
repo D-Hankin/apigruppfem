@@ -71,7 +71,7 @@ public class CityService {
 
     @SuppressWarnings("unchecked")
     public List<City> findCityByApiKey(UUID apiKey) {
-        System.out.println("here: " + apiKey);
+    
         Query query = em.createQuery("SELECT c FROM City c WHERE c.apiKey = :apiKey");
         query.setParameter("apiKey", apiKey);
 
@@ -120,7 +120,7 @@ public class CityService {
 
     public Long countAllCountries(UUID apiKey) {
 
-        if (userService.findUserByApiKey(apiKey) != null) {
+        if (userService.findUserByApiKey(apiKey) != null && userService.findUserByApiKey(apiKey).getAccountActive() == 1) {
 
             return em.createQuery("SELECT COUNT(DISTINCT country) FROM City c", Long.class).getSingleResult();
 
@@ -132,7 +132,7 @@ public class CityService {
     @SuppressWarnings("unchecked")
     public List<String> seeAllCountries(UUID apiKey) {
 
-        if (userService.findUserByApiKey(apiKey) != null) {
+        if (userService.findUserByApiKey(apiKey) != null && userService.findUserByApiKey(apiKey).getAccountActive() == 1) {
 
             return em.createQuery("SELECT DISTINCT country FROM City c").getResultList();
 
@@ -144,7 +144,7 @@ public class CityService {
 
     @SuppressWarnings("unchecked")
     public List<City> mostPopulaceCities(UUID apiKey) {
-        if (userService.findUserByApiKey(apiKey) != null) {
+        if (userService.findUserByApiKey(apiKey) != null && userService.findUserByApiKey(apiKey).getAccountActive() == 1) {
 
             return em.createQuery("SELECT c FROM City c ORDER BY c.population DESC LIMIT 10").getResultList();
 
@@ -155,7 +155,7 @@ public class CityService {
 
     @SuppressWarnings("unchecked")
     public List<City> leastPopulaceCities(UUID apiKey) {
-        if (userService.findUserByApiKey(apiKey) != null) {
+        if (userService.findUserByApiKey(apiKey) != null && userService.findUserByApiKey(apiKey).getAccountActive() == 1) {
 
             return em.createQuery("SELECT c FROM City c ORDER BY c.population LIMIT 10").getResultList();
 
@@ -166,7 +166,7 @@ public class CityService {
 
     @SuppressWarnings("unchecked")
     public List<City> randomCity(UUID apiKey) {
-        if (userService.findUserByApiKey(apiKey) != null) {
+        if (userService.findUserByApiKey(apiKey) != null && userService.findUserByApiKey(apiKey).getAccountActive() == 1) {
 
             return em.createQuery("SELECT c FROM City c ORDER BY RANDOM() LIMIT 1").getResultList();
 
