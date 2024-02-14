@@ -18,6 +18,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -91,6 +92,25 @@ public class ReviewResource {
 
         } catch (UnhandledException e) {
             return Response.status(Response.Status.METHOD_NOT_ALLOWED).entity("Delete not executed").build();
+        }
+    }
+
+    @PATCH
+    public Response editReview(@PathParam("apiKey") UUID apiKey, @RequestBody Review review) {
+
+        try {
+            reviewService.editSingleReview(apiKey, review);
+            
+            Review updatedReview = reviewService.findReviewByReviewId(review.getReviewId());
+            updatedReview.getUser().setApiKey(null);
+            updatedReview.getCity().getUser().setApiKey(null);
+            updatedReview.setApiKey(null);
+            updatedReview.getCity().setApiKey(null);
+            
+            return Response.ok(updatedReview).build();
+                
+        } catch (UnhandledException e) {
+            return Response.status(Response.Status.METHOD_NOT_ALLOWED).entity("Edit not executed").build();
         }
     }
 }
