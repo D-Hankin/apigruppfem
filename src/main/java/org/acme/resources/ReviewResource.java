@@ -53,8 +53,15 @@ public class ReviewResource {
             return Response.status(Response.Status.METHOD_NOT_ALLOWED)
                     .entity("Invalid APIKEY")
                     .build();
-
         }
+    }
+
+    @GET
+    @Path("/{cityName}/{rating}")
+    public Response getReviewsByRating(@PathParam("apiKey") UUID apiKey, @PathParam("cityName") String cityName,
+            @PathParam("rating") int rating) {
+        List<Review> reviews = reviewService.reviewsByRating(apiKey, cityName, rating);
+        return Response.ok(reviews).build();
     }
 
     @DELETE

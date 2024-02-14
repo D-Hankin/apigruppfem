@@ -111,7 +111,7 @@ insert into t_review (apiKey, cityId, review, rating) values
 ('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', '35', 'Charming markets and historic landmarks.', '3'),
 ('c86f88c4-ae9a-4be4-ae12-742611db5557', '27', 'A city with a rich cultural tapestry and historical significance.', '4'),
 ('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', '21', 'Quaint streets and a welcoming atmosphere.', '5'),
-('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', '1', 'A fantastic city with rich history and vibrant culture.', '4'),
+('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', '1', 'A fantastic city with rich history and vibrant culture.', '5'),
 ('c86f88c4-ae9a-4be4-ae12-742611db5557', '10', 'Diverse cultural experiences and friendly locals.', '5'),
 ('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', '38', 'Chic architecture and a bustling nightlife.', '3'),
 ('c86f88c4-ae9a-4be4-ae12-742611db5557', '24', 'Scenic views and a peaceful environment.', '4'),
