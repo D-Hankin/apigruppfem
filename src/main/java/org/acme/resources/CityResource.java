@@ -124,7 +124,14 @@ public class CityResource {
     public Response listOfCountries(@PathParam("apiKey") UUID apiKey) {
 
         try {
-            return Response.ok(cityService.seeAllCountries(apiKey)).build();
+            List<String> countries = cityService.seeAllCountries(apiKey);
+            if (countries != null) {
+                return Response.ok(countries).build();
+            } else {
+                return Response.status(Response.Status.METHOD_NOT_ALLOWED)
+                .entity("You need an API key to see this information.")
+                .build();
+            }
         } catch (Exception e) {
             return Response.status(Response.Status.METHOD_NOT_ALLOWED)
                     .entity("You need an API key to see this information.")

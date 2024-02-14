@@ -35,6 +35,7 @@ public class UserService {
     @Transactional(Transactional.TxType.REQUIRED)
     public User createNewUser(User user) {
         user.setApiKey(UUID.randomUUID());
+        user.setAccountActive(1);
         em.persist(user);
         return user;
     }
@@ -42,8 +43,9 @@ public class UserService {
     @Transactional(Transactional.TxType.REQUIRED)
     public void deleteUserByApiKey(UUID apiKey) {
 
-        Query query = em.createQuery("DELETE FROM User u WHERE u.apiKey = ?1");
+        Query query = em.createQuery("UPDATE User u SET accountActive = :accountActive  WHERE u.apiKey = ?1");
         query.setParameter(1, apiKey);
+        query.setParameter("accountActive", 0);
         query.executeUpdate();
     }
 

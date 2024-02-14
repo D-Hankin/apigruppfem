@@ -61,9 +61,9 @@ public class UserResource {
         return Response.created(createdUri).entity(user).build();
     }
 
-    @DELETE
-    @Operation(summary = "Delete a user.", description = "Enter userId to delete a user.")
-    @Path("/{apiKey}")
+    @PATCH
+    @Operation(summary = "Delete a user (soft).", description = "Enter the API key to deactivate it.")
+    @Path("/{apiKey}/deactivate-apikey")
     public Response deleteUser(@PathParam("apiKey") UUID apiKey) {
         userService.deleteUserByApiKey(apiKey);
         return Response.ok().build();
