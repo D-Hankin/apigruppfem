@@ -38,7 +38,7 @@ public class CityResource {
     UserService userService;
 
     @GET
-    @Operation(summary = "Show all the current cities", description = "Retrieve and show all the cities currently in the database.")
+    @Operation(summary = "Show all the current cities", description = "Enter API-key to the URL to retrieve and show all the cities currently in the database.")
     @APIResponse(responseCode = "204", description = "No cities currently in the database")
     public Response getCities() {
 
@@ -52,7 +52,7 @@ public class CityResource {
     }
 
     @POST
-    @Operation(summary = "Create a city", description = "Enter cityName, country, description, population and imageUrl(String).\nPopulation values: Min value = 1,000, Max value = 100,000,000")
+    @Operation(summary = "Create a city", description = "Enter API-key to the URL. Enter cityName, country, description, population and imageUrl(String) to the request body.\nPopulation values: Min value = 1,000, Max value = 100,000,000")
     public Response createCity(@Valid City city, @PathParam("apiKey") UUID apiKey) throws URISyntaxException {
 
         if (userService.findUserByApiKey(apiKey) != null && cityService.findCityByName(city.getCityName()) == null) {
@@ -68,13 +68,14 @@ public class CityResource {
     }
 
     @DELETE
-    @Operation(summary = "Delete a city", description = "Enter cityId & apiKey to delete a city")
+    @Operation(summary = "Delete a city", description = "Enter cityId & the city creator API-key to the URL to delete a city")
     @Path("/{cityName}")
     public Response deleteCity(@PathParam("apiKey") UUID apiKey, @PathParam("cityName") String cityName) {
         cityService.deleteByApiKey(apiKey, cityName);
         return Response.noContent().build();
     }
 
+    @Operation(summary = "Update a City", description = "Enter API-key to the URL. Enter cityName, country, description, imageUrl and population to the request body")
     @PATCH
     public City updateCity(@RequestBody City city, @PathParam("apiKey") UUID apiKey) {
         cityService.updateCityByApiKey(city, apiKey);
@@ -82,6 +83,7 @@ public class CityResource {
         return cityService.findCityByApiKeyAndCityName(city.getCityName(), apiKey);
     }
 
+    @Operation(summary = "Finds a single city", description = "Enter API-key and cityName to the URL to show the city ")
     @GET
     @Path("/{cityName}")
     public City findSingleCity(@PathParam("apiKey") UUID apiKey, @PathParam("cityName") String cityName) {
@@ -89,6 +91,7 @@ public class CityResource {
         return cityService.findCityByApiKeyAndCityName(cityName, apiKey);
     }
 
+    @Operation(summary = "Shows your created cities", description = "Enter API-key to the URL to show your created cities")
     @GET
     @Path("/my-cities")
     public List<City> findMyCities(@PathParam("apiKey") UUID apiKey) {
@@ -96,6 +99,7 @@ public class CityResource {
         return cityService.findCityByApiKey(apiKey);
     }
 
+    @Operation(summary = "Show how many cities that are in the database", description = "Enter API-key to the URL to show how many cities that are in the database")
     @GET
     @Path("/number-of-cities")
     public String cityCount(@PathParam("apiKey") UUID apiKey) {
@@ -109,6 +113,7 @@ public class CityResource {
     }
 
     @GET
+    @Operation(summary = "Show how many countries that are in the database", description = "Enter API-key to the URL to show how many countries that are in the database")
     @Path("/number-of-countries")
     public String countryCount(@PathParam("apiKey") UUID apiKey) {
 
@@ -120,6 +125,7 @@ public class CityResource {
     }
 
     @GET
+    @Operation(summary = "Shows a list of all countries in the database", description = "Enter API-key to the URL to show a list off all countries")
     @Path("/list-all-countries")
     public Response listOfCountries(@PathParam("apiKey") UUID apiKey) {
 
@@ -129,8 +135,8 @@ public class CityResource {
                 return Response.ok(countries).build();
             } else {
                 return Response.status(Response.Status.METHOD_NOT_ALLOWED)
-                .entity("You need an API key to see this information.")
-                .build();
+                        .entity("You need an API key to see this information.")
+                        .build();
             }
         } catch (Exception e) {
             return Response.status(Response.Status.METHOD_NOT_ALLOWED)
@@ -140,6 +146,7 @@ public class CityResource {
     }
 
     @GET
+    @Operation(summary = "Show the ten most populated cities ", description = "Enter API-key to the URL to show the ten most populated cities")
     @Path("/most-populace-cities")
     public Response mostPopulaceCities(@PathParam("apiKey") UUID apiKey) {
         try {
@@ -152,6 +159,7 @@ public class CityResource {
     }
 
     @GET
+    @Operation(summary = "Show the ten least populated cities", description = "Enter API-key to the URL to show the ten least populated cities")
     @Path("/least-populace-cities")
     public Response leastPopulaceCities(@PathParam("apiKey") UUID apiKey) {
         try {
@@ -164,6 +172,7 @@ public class CityResource {
     }
 
     @GET
+    @Operation(summary = "Shows a random city", description = "Enter API-key to the URL to show a random city")
     @Path("/random-city")
     public Response randomCity(@PathParam("apiKey") UUID apiKey) {
         try {

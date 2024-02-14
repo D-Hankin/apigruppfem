@@ -15,7 +15,6 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
@@ -30,6 +29,7 @@ public class UserResource {
     @Inject
     UserService userService;
 
+    // Resurs för lättare testning av data. Inte menat att vara del av projektet
     @GET
     @Operation(summary = "Show all the current users", description = "Retrieve and show all the users currently in the database.")
     @APIResponse(responseCode = "204", description = "No user currently in the database")
@@ -45,7 +45,7 @@ public class UserResource {
     }
 
     @GET
-    @Operation(summary = "Show all current users", description = "Retrieve and show all the users currently in the database.\"")
+    @Operation(summary = "Show all current users", description = "Enter API-key to the URL to retrieve and show all the users currently in the database.\"")
     @Path("/{apiKey}")
     public Response getUserById(@PathParam("apiKey") UUID apiKey) {
         User user = userService.findUserByApiKey(apiKey);
@@ -53,7 +53,7 @@ public class UserResource {
     }
 
     @POST
-    @Operation(summary = "Create a user", description = "Enter firstName, lastName and email")
+    @Operation(summary = "Create a user", description = "Enter API-key to the URL. Enter firstName, lastName and email to the request body")
     @Path("/create-user")
     public Response createUser(@Valid User user) throws URISyntaxException {
         user = userService.createNewUser(user);
@@ -62,7 +62,7 @@ public class UserResource {
     }
 
     @PATCH
-    @Operation(summary = "Delete a user (soft).", description = "Enter the API key to deactivate it.")
+    @Operation(summary = "Delete a user (soft).", description = "Enter API-key to the URL to deactivate it.")
     @Path("/{apiKey}/deactivate-apikey")
     public Response deleteUser(@PathParam("apiKey") UUID apiKey) {
         userService.deleteUserByApiKey(apiKey);
@@ -70,7 +70,7 @@ public class UserResource {
     }
 
     @PATCH
-    @Operation(summary = "Update a user", description = "Enter apiKey and the values you want to change to update the user.")
+    @Operation(summary = "Update a user", description = "Enter API-key and the values you want to change to the request body to update the user.")
     @Path("/{apiKey}")
     public User updateUser(@RequestBody User user, @PathParam("apiKey") UUID apiKey) {
         userService.updateUserByApiKey(apiKey, user);

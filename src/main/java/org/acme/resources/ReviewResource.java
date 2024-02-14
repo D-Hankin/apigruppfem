@@ -32,7 +32,7 @@ public class ReviewResource {
     ReviewService reviewService;
 
     @GET
-    @Operation(summary = "Show all the current reviews for a user", description = "Retrieve and show all the reviews currently in the database connected to a specific api key.")
+    @Operation(summary = "Show all the current reviews for a user", description = "Enter API-key to the URL to retrieve and show all the reviews currently in the database connected to a specific api key.")
     @APIResponse(responseCode = "204", description = "No reviews currently in the database connected to that api key.")
     public Response getReviews(@PathParam("apiKey") UUID apiKey) {
 
@@ -46,6 +46,7 @@ public class ReviewResource {
     }
 
     @POST
+    @Operation(summary = "Submits a review of a city", description = "Enter API-key to the URL to submit a review of a city")
     @Path("/submit-review")
     public Response submitReview(@PathParam("apiKey") UUID apiKey, @RequestBody Review review) {
         if (reviewService.createNewReview(apiKey, review) != null) {
@@ -58,6 +59,7 @@ public class ReviewResource {
     }
 
     @GET
+    @Operation(summary = "Shows ratings of a city", description = "Enter API-key and a rating to the URL to show all reviews of that city with that rating")
     @Path("/{cityName}/{rating}")
     public Response getReviewsByRating(@PathParam("apiKey") UUID apiKey, @PathParam("cityName") String cityName,
             @PathParam("rating") int rating) {
@@ -66,20 +68,20 @@ public class ReviewResource {
     }
 
     @DELETE
+    @Operation(summary = "Deletes all reviews from the API holder", description = "Enter API-key to the URL to delete all reviews associated to that API key")
     public Response deleteAllReviews(@PathParam("apiKey") UUID apiKey) {
 
         try {
-            System.out.println("Jag körs i Try");
             reviewService.deleteAllReviewsByApiKey(apiKey);
             return Response.ok().build();
         } catch (UnhandledException e) {
-            System.out.println("Jag körs i Catch");
             return Response.status(Response.Status.METHOD_NOT_ALLOWED).entity("Delete not executed").build();
         }
 
     }
 
     @DELETE
+    @Operation(summary = "Delete a review", description = "Enter the review creators API-key and the reviewId to the URL to delete the review ")
     @Path("/{reviewId}")
     public Response deleteSingleReview(@PathParam("apiKey") UUID apiKey, @PathParam("reviewId") Long reviewId) {
         try {
@@ -87,7 +89,7 @@ public class ReviewResource {
             if (success == true) {
                 return Response.ok().entity("You have successfully deleted the review.").build();
             } else {
-                return Response.status(Response.Status.METHOD_NOT_ALLOWED).entity("Delete not executed").build();    
+                return Response.status(Response.Status.METHOD_NOT_ALLOWED).entity("Delete not executed").build();
             }
 
         } catch (UnhandledException e) {
@@ -96,19 +98,20 @@ public class ReviewResource {
     }
 
     @PATCH
+    @Operation(summary = "Edit a review", description = "Enter the review creators API-key to the URL. Enter reviewId, review and rating to the request body")
     public Response editReview(@PathParam("apiKey") UUID apiKey, @RequestBody Review review) {
 
         try {
             reviewService.editSingleReview(apiKey, review);
-            
+
             Review updatedReview = reviewService.findReviewByReviewId(review.getReviewId());
             updatedReview.getUser().setApiKey(null);
             updatedReview.getCity().getUser().setApiKey(null);
             updatedReview.setApiKey(null);
             updatedReview.getCity().setApiKey(null);
-            
+
             return Response.ok(updatedReview).build();
-                
+
         } catch (UnhandledException e) {
             return Response.status(Response.Status.METHOD_NOT_ALLOWED).entity("Edit not executed").build();
         }
