@@ -108,10 +108,21 @@ public class ReviewService {
         return success;
     }
 
-    private Review findReviewByReviewId(Long reviewId) {
+    public Review findReviewByReviewId(Long reviewId) {
         
         Review review = (Review) em.createQuery("SELECT r FROM Review r WHERE r.reviewId = :reviewId").setParameter("reviewId", reviewId).getSingleResult();
         
         return review;
+    }
+
+    @Transactional(Transactional.TxType.REQUIRED)
+    public void editSingleReview(UUID apiKey, Review review) {
+        Query query = em.createQuery(
+                "UPDATE Review r SET review = :review, rating = :rating WHERE apiKey = :apiKey AND reviewId = :reviewId");
+        query.setParameter("review", review.getReview());
+        query.setParameter("rating", review.getRating());
+        query.setParameter("reviewId", review.getReviewId());
+        query.setParameter("apiKey", apiKey);
+        query.executeUpdate();
     }
 }
