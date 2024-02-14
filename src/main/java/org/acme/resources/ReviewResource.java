@@ -77,4 +77,20 @@ public class ReviewResource {
         }
 
     }
+
+    @DELETE
+    @Path("/{reviewId}")
+    public Response deleteSingleReview(@PathParam("apiKey") UUID apiKey, @PathParam("reviewId") Long reviewId) {
+        try {
+            boolean success = reviewService.deleteSingleReviewByReviewId(apiKey, reviewId);
+            if (success == true) {
+                return Response.ok().entity("You have successfully deleted the review.").build();
+            } else {
+                return Response.status(Response.Status.METHOD_NOT_ALLOWED).entity("Delete not executed").build();    
+            }
+
+        } catch (UnhandledException e) {
+            return Response.status(Response.Status.METHOD_NOT_ALLOWED).entity("Delete not executed").build();
+        }
+    }
 }

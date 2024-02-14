@@ -13,10 +13,10 @@
     create table t_review (
         rating integer not null,
         cityId bigint,
-        reviewID bigserial not null,
+        reviewId bigserial not null,
         apiKey uuid,
         review varchar(255),
-        primary key (reviewID)
+        primary key (reviewId)
     );
 
     create table t_user (
