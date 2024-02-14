@@ -21,7 +21,7 @@ insert into t_user (apiKey,firstName,lastName, email, accountActive) values
 ('9e50b8c3-7841-4d0e-bcf5-700e1cd02285','Elsa','Björk','elsa.bjork@example.com', 1);
 
 insert into t_city (apiKey, cityName, country, description, population, imageUrl) values 
-('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', 'Stockholm', 'Sweden', 'Stockholm, the capital of Sweden, encompasses 14 islands and more than 50 bridges on an extensive Baltic Sea archipelago.', '975904', 'http://localhost/images/rb97bn7g9n.jpg'),
+('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', 'Stockholm', 'Sweden', 'Stockholm, the capital of Sweden, encompasses 14 islands and more than 50 bridges on an extensive Baltic Sea archipelago.', '975904', 'http://localhost:8080/images/rb97bn7g9n.jpg'),
 ('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', 'New York City', 'United States', 'New York City comprises 5 boroughs sitting where the Hudson River meets the Atlantic Ocean.', '8336817', 'http://localhost:8080/images/dvd98bheb.jpg'),
 ('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', 'Paris', 'France', 'Paris, France''s capital, is a major European city and a global center for art, fashion, gastronomy, and culture.', '2148271', 'http://localhost:8080/images/jn53jbf9f.jpg'),
 ('84dddfe1-9c42-4a50-9fb2-c4d8640468c6', 'Tokyo', 'Japan', 'Tokyo, Japan''s bustling capital, mixes the ultramodern and the traditional.', '13515271', 'http://localhost:8080/images/08shsbfsjkn4.jpg'),
@@ -58,7 +58,7 @@ insert into t_city (apiKey, cityName, country, description, population, imageUrl
 ('4a782315-1dc4-4d5b-a6a7-8c63bf27940b', 'Nagoya', 'Japan', 'Nagoya is a city in central Japan known for its automotive industry, historic shrines, and Nagoya Castle.', '2392824', 'http://localhost:8080/images/.jpg'),
 ('4a782315-1dc4-4d5b-a6a7-8c63bf27940b', 'Edinburgh', 'United Kingdom', 'Edinburgh, the capital of Scotland, is known for its historic and cultural attractions, including the Edinburgh Castle.', '542952', 'http://localhost:8080/images/.jpg'),
 ('4a782315-1dc4-4d5b-a6a7-8c63bf27940b', 'Manchester', 'United Kingdom', 'Manchester is a vibrant city in England known for its music scene, industrial history, and modern developments.', '547627', 'http://localhost:8080/images/.jpg'),
-('4a782315-1dc4-4d5b-a6a7-8c63bf27940b', 'Birmingham', 'United Kingdom', 'Birmingham, in the West Midlands, is known for its canals, industrial heritage, and diverse cultural scene.', '1141816', 'http://localhost:8080/images/.jpg'),
+('4a782315-1dc4-4d5b-a6a7-8c63bf27940b', 'Winchester', 'United Kingdom', 'Winchester, UK, boasts medieval charm with its historic cathedral, cobbled streets, and traditional architecture. Its a cultural gem in Hampshire, known for its rich history and picturesque surroundings.', '116600', 'http://localhost:8080/images/.jpg'),
 ('4a782315-1dc4-4d5b-a6a7-8c63bf27940b', 'Glasgow', 'United Kingdom', 'Glasgow, in Scotland, is known for its Victorian architecture, vibrant arts scene, and friendly locals.', '635640', 'http://localhost:8080/images/.jpg');
 
 

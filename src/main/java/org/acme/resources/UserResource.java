@@ -66,7 +66,7 @@ public class UserResource {
     @Path("/{apiKey}/deactivate-apikey")
     public Response deleteUser(@PathParam("apiKey") UUID apiKey) {
         userService.deleteUserByApiKey(apiKey);
-        return Response.ok().build();
+        return Response.ok().entity("The API key has been deactivated!").build();
     }
 
     @PATCH
