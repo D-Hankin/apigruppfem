@@ -18,7 +18,7 @@ import jakarta.transaction.Transactional;
 @ApplicationScoped
 @Named
 public class CityService {
-    
+
     @Inject
     EntityManager em;
 
@@ -36,12 +36,12 @@ public class CityService {
 
     public Long countAllCities(UUID apiKey) {
 
-            if (userService.findUserByApiKey(apiKey) != null) {
-                return em.createQuery("SELECT COUNT(c) FROM City c", Long.class).getSingleResult(); 
+        if (userService.findUserByApiKey(apiKey) != null) {
+            return em.createQuery("SELECT COUNT(c) FROM City c", Long.class).getSingleResult();
 
-            } else {
-                return null;
-            }
+        } else {
+            return null;
+        }
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
@@ -74,35 +74,36 @@ public class CityService {
         System.out.println("here: " + apiKey);
         Query query = em.createQuery("SELECT c FROM City c WHERE c.apiKey = :apiKey");
         query.setParameter("apiKey", apiKey);
-        
+
         return query.getResultList();
     }
 
     public City findCityByApiKeyAndCityName(String cityName, UUID apiKey) {
 
-        TypedQuery<City> query = em.createQuery("SELECT c FROM City c WHERE c.apiKey = ?1 AND c.cityName = ?2", City.class);
+        TypedQuery<City> query = em.createQuery("SELECT c FROM City c WHERE c.apiKey = ?1 AND c.cityName = ?2",
+                City.class);
         query.setParameter(1, apiKey);
         query.setParameter(2, cityName);
 
         return query.getSingleResult();
     }
-    
+
     @Transactional(Transactional.TxType.REQUIRED)
     public void deleteByApiKey(UUID apiKey, String cityName) {
 
-            Query selectQuery = em.createQuery("SELECT c FROM City c WHERE c.cityName = :cityName");
-            selectQuery.setParameter("cityName", cityName);
-            City city = (City) selectQuery.getSingleResult();
+        Query selectQuery = em.createQuery("SELECT c FROM City c WHERE c.cityName = :cityName");
+        selectQuery.setParameter("cityName", cityName);
+        City city = (City) selectQuery.getSingleResult();
 
-            Query deleteQuery = em.createQuery("DELETE FROM Review r WHERE r.cityId = :cityId");
-            deleteQuery.setParameter("cityId", city.getCityId());
-            deleteQuery.executeUpdate();
-    
-            Query query = em.createQuery("DELETE FROM City c WHERE c.apiKey = ?1 AND c.cityName = ?2");
-            query.setParameter(1, apiKey);
-            query.setParameter(2, cityName);
-            query.executeUpdate();
-        }
+        Query deleteQuery = em.createQuery("DELETE FROM Review r WHERE r.cityId = :cityId");
+        deleteQuery.setParameter("cityId", city.getCityId());
+        deleteQuery.executeUpdate();
+
+        Query query = em.createQuery("DELETE FROM City c WHERE c.apiKey = ?1 AND c.cityName = ?2");
+        query.setParameter(1, apiKey);
+        query.setParameter(2, cityName);
+        query.executeUpdate();
+    }
 
     public City findCityByName(String cityName) {
 
@@ -118,10 +119,10 @@ public class CityService {
     }
 
     public Long countAllCountries(UUID apiKey) {
-        
+
         if (userService.findUserByApiKey(apiKey) != null) {
-            
-            return em.createQuery("SELECT COUNT(DISTINCT country) FROM City c", Long.class).getSingleResult(); 
+
+            return em.createQuery("SELECT COUNT(DISTINCT country) FROM City c", Long.class).getSingleResult();
 
         } else {
             return null;
@@ -130,22 +131,22 @@ public class CityService {
 
     @SuppressWarnings("unchecked")
     public List<String> seeAllCountries(UUID apiKey) {
-        
+
         if (userService.findUserByApiKey(apiKey) != null) {
-            
-            return em.createQuery("SELECT DISTINCT country FROM City c").getResultList(); 
+
+            return em.createQuery("SELECT DISTINCT country FROM City c").getResultList();
 
         } else {
             return null;
         }
-        
+
     }
 
     @SuppressWarnings("unchecked")
     public List<City> mostPopulaceCities(UUID apiKey) {
         if (userService.findUserByApiKey(apiKey) != null) {
-            
-            return em.createQuery("SELECT c FROM City c ORDER BY c.population DESC LIMIT 10").getResultList(); 
+
+            return em.createQuery("SELECT c FROM City c ORDER BY c.population DESC LIMIT 10").getResultList();
 
         } else {
             return null;
@@ -155,8 +156,8 @@ public class CityService {
     @SuppressWarnings("unchecked")
     public List<City> leastPopulaceCities(UUID apiKey) {
         if (userService.findUserByApiKey(apiKey) != null) {
-            
-            return em.createQuery("SELECT c FROM City c ORDER BY c.population LIMIT 10").getResultList(); 
+
+            return em.createQuery("SELECT c FROM City c ORDER BY c.population LIMIT 10").getResultList();
 
         } else {
             return null;
@@ -165,12 +166,12 @@ public class CityService {
 
     @SuppressWarnings("unchecked")
     public List<City> randomCity(UUID apiKey) {
-     if (userService.findUserByApiKey(apiKey) != null) {
-            
-            return em.createQuery("SELECT c FROM City c ORDER BY RANDOM() LIMIT 1").getResultList(); 
+        if (userService.findUserByApiKey(apiKey) != null) {
+
+            return em.createQuery("SELECT c FROM City c ORDER BY RANDOM() LIMIT 1").getResultList();
 
         } else {
             return null;
         }
-}
+    }
 }

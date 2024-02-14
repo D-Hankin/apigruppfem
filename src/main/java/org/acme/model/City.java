@@ -16,54 +16,52 @@ import jakarta.validation.constraints.NotEmpty;
 @Entity
 @Table(name = "t_city")
 public class City {
-    
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cityId;
-    
+
     @ManyToOne
     @JoinColumn(name = "apiKey", referencedColumnName = "apiKey", insertable = false, updatable = false)
     private User user;
-    
     private UUID apiKey;
-    
+
     @NotEmpty(message = "CityName must not be empty")
     private String cityName;
 
     @NotEmpty(message = "Country must not be empty")
     private String country;
-    
+
     @NotEmpty(message = "Description must not be empty")
     private String description;
-    
+
     @Min(value = 1000, message = "Value must be at least 1000")
     @Max(value = 100000000, message = "value must be less than 100,000,000")
     private int population;
-    
+
     @NotEmpty(message = "Image URL must not be empty")
     private String imageUrl;
-    
+
     public User getUser() {
         return user;
     }
-    
+
     public void setUser(User user) {
         this.user = user;
     }
-    
+
     public UUID getApiKey() {
         return apiKey;
     }
-    
+
     public void setApiKey(UUID apiKey) {
         this.apiKey = apiKey;
     }
-    
+
     public Long getCityId() {
         return cityId;
     }
-    
+
     public void setCityId(Long cityId) {
         this.cityId = cityId;
     }
@@ -71,7 +69,7 @@ public class City {
     public String getCityName() {
         return cityName;
     }
-    
+
     public void setCityName(String cityName) {
         this.cityName = cityName;
     }
@@ -103,7 +101,7 @@ public class City {
     public String getImageUrl() {
         return imageUrl;
     }
-    
+
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }

@@ -45,10 +45,7 @@ public class UserResource {
     }
 
     @GET
-    @Operation(
-        summary = "Show all current users",
-        description = "Retrieve and show all the users currently in the database.\""
-    )
+    @Operation(summary = "Show all current users", description = "Retrieve and show all the users currently in the database.\"")
     @Path("/{apiKey}")
     public Response getUserById(@PathParam("apiKey") UUID apiKey) {
         User user = userService.findUserByApiKey(apiKey);
@@ -56,10 +53,7 @@ public class UserResource {
     }
 
     @POST
-    @Operation(
-        summary = "Create a user",
-        description = "Enter firstName, lastName and email"
-    )
+    @Operation(summary = "Create a user", description = "Enter firstName, lastName and email")
     @Path("/create-user")
     public Response createUser(@Valid User user) throws URISyntaxException {
         user = userService.createNewUser(user);
@@ -68,21 +62,15 @@ public class UserResource {
     }
 
     @DELETE
-    @Operation(
-        summary = "Delete a user.",
-        description = "Enter userId to delete a user."
-    )
+    @Operation(summary = "Delete a user.", description = "Enter userId to delete a user.")
     @Path("/{apiKey}")
     public Response deleteUser(@PathParam("apiKey") UUID apiKey) {
         userService.deleteUserByApiKey(apiKey);
-        return Response.noContent().build();
+        return Response.ok().build();
     }
 
     @PATCH
-    @Operation(
-        summary = "Update a user",
-        description = "Enter apiKey and the values you want to change to update the user."
-    )
+    @Operation(summary = "Update a user", description = "Enter apiKey and the values you want to change to update the user.")
     @Path("/{apiKey}")
     public User updateUser(@RequestBody User user, @PathParam("apiKey") UUID apiKey) {
         userService.updateUserByApiKey(apiKey, user);

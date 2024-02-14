@@ -4,20 +4,22 @@ import java.util.UUID;
 
 import org.hibernate.validator.constraints.UniqueElements;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name= "t_user", uniqueConstraints = @UniqueConstraint(columnNames = {"apiKey"}))
+@Table(name = "t_user", uniqueConstraints = @UniqueConstraint(columnNames = { "apiKey" }))
 public class User {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
@@ -75,5 +77,4 @@ public class User {
         this.email = email;
     }
 
-    
 }
