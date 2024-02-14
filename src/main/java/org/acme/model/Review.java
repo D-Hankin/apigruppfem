@@ -11,6 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
 @Entity
@@ -32,13 +33,13 @@ public class Review {
 
     private Long cityId;
 
-    @NotEmpty
-    @Min(value = 1, message = "The review can not be empty.")
+    @NotBlank(message = "Can't be empty")
+    @Min(value = 1)
     @Max(value = 200, message = "The review can't be more than 200 characters.")
     private String review;
 
     @NotEmpty
-    @Min(value = 1, message = "Rating must be at least 1")
+    @Min(value = 1)
     @Max(value = 5, message = "Rating must be less than 5")
     private int rating;
 
