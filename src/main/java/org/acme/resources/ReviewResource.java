@@ -46,7 +46,7 @@ public class ReviewResource {
     }
 
     @POST
-    @Operation(summary = "Submits a review of a city", description = "Enter API-key to the URL to submit a review of a city")
+    @Operation(summary = "Submits a review of a city", description = "Enter API-key to the URL and submit a review of the city as a JSON object. The Review object needs to contain a review, rating and a cityId(can be seen in the city object)")
     @Path("/submit-review")
     public Response submitReview(@PathParam("apiKey") UUID apiKey, @RequestBody Review review) {
         if (reviewService.createNewReview(apiKey, review) != null) {
@@ -98,7 +98,7 @@ public class ReviewResource {
     }
 
     @PATCH
-    @Operation(summary = "Edit a review", description = "Enter the review creators API-key to the URL. Enter reviewId, review and rating to the request body")
+    @Operation(summary = "Edit a review", description = "Enter the review creators API-key to the URL. Enter reviewId, review and rating to the request body (JSON)")
     public Response editReview(@PathParam("apiKey") UUID apiKey, @RequestBody Review review) {
 
         try {

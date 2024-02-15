@@ -40,9 +40,9 @@ public class CityResource {
     @GET
     @Operation(summary = "Show all the current cities", description = "Enter API-key to the URL to retrieve and show all the cities currently in the database.")
     @APIResponse(responseCode = "204", description = "No cities currently in the database")
-    public Response getCities() {
+    public Response getCities(@PathParam("apiKey") UUID apiKey) {
 
-        List<City> cities = cityService.findAll();
+        List<City> cities = cityService.findAll(apiKey);
 
         if (cities.isEmpty()) {
             return Response.noContent().build();
@@ -52,7 +52,7 @@ public class CityResource {
     }
 
     @POST
-    @Operation(summary = "Create a city", description = "Enter API-key to the URL. Enter cityName, country, description, population and imageUrl(String) to the request body.\nPopulation values: Min value = 1,000, Max value = 100,000,000")
+    @Operation(summary = "Create a city", description = "Enter API-key to the URL. Enter cityName, country, description, population and imageUrl(String) to the request body (JSON).\nPopulation values: Min value = 1,000, Max value = 100,000,000")
     public Response createCity(@Valid City city, @PathParam("apiKey") UUID apiKey) throws URISyntaxException {
 
         if (userService.findUserByApiKey(apiKey) != null && cityService.findCityByName(city.getCityName()) == null) {
@@ -75,7 +75,7 @@ public class CityResource {
         return Response.noContent().build();
     }
 
-    @Operation(summary = "Update a City", description = "Enter API-key to the URL. Enter cityName, country, description, imageUrl and population to the request body")
+    @Operation(summary = "Update a City", description = "Enter API-key to the URL. Enter cityName, country, description, imageUrl and population to the request body(JSON)")
     @PATCH
     public City updateCity(@RequestBody City city, @PathParam("apiKey") UUID apiKey) {
         cityService.updateCityByApiKey(city, apiKey);
@@ -83,7 +83,7 @@ public class CityResource {
         return cityService.findCityByApiKeyAndCityName(city.getCityName(), apiKey);
     }
 
-    @Operation(summary = "Finds a single city", description = "Enter API-key and cityName to the URL to show the city ")
+    @Operation(summary = "Finds a single city", description = "Enter API-key and cityName to the URL to show the city")
     @GET
     @Path("/{cityName}")
     public City findSingleCity(@PathParam("apiKey") UUID apiKey, @PathParam("cityName") String cityName) {
