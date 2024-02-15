@@ -90,7 +90,11 @@ public class CityService {
         query.setParameter(1, apiKey);
         query.setParameter(2, cityName);
 
-        return query.getSingleResult();
+        City city = query.getSingleResult();
+        city.setApiKey(null);
+        city.getUser().setApiKey(null);
+
+        return city;
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
@@ -149,12 +153,11 @@ public class CityService {
 
     }
 
-    @SuppressWarnings("unchecked")
     public List<City> mostPopulaceCities(UUID apiKey) {
         if (userService.findUserByApiKey(apiKey) != null
                 && userService.findUserByApiKey(apiKey).getAccountActive() == 1) {
 
-            return em.createQuery("SELECT c FROM City c ORDER BY c.population DESC LIMIT 10").getResultList();
+            return em.createQuery("SELECT * FROM City c ORDER BY c.population DESC LIMIT 10", City.class).getResultList();
 
         } else {
             return null;
@@ -162,7 +165,7 @@ public class CityService {
     }
 
     @SuppressWarnings("unchecked")
-    public List<City> leastPopulaceCities(UUID apiKey) {
+    public List<City> tenLeastPopulaceCities(UUID apiKey) {
         if (userService.findUserByApiKey(apiKey) != null
                 && userService.findUserByApiKey(apiKey).getAccountActive() == 1) {
 

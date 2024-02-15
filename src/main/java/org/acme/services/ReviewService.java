@@ -40,6 +40,7 @@ public class ReviewService {
 
     @Transactional(Transactional.TxType.REQUIRED)
     public Review createNewReview(UUID apiKey, Review review) {
+        review.setApiKey(apiKey);
         try {
             if (userService.findUserByApiKey(apiKey) != null
                     && userService.findUserByApiKey(review.getApiKey()) == userService.findUserByApiKey(apiKey)) {
