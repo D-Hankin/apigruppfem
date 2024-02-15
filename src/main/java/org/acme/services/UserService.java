@@ -12,6 +12,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+import jakarta.validation.UnexpectedTypeException;
 
 @Transactional(Transactional.TxType.SUPPORTS)
 @ApplicationScoped
@@ -33,11 +34,15 @@ public class UserService {
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
-    public User createNewUser(User user) {
-        user.setApiKey(UUID.randomUUID());
-        user.setAccountActive(1);
-        em.persist(user);
-        return user;
+    public User createNewUser(User user) throws UnexpectedTypeException {
+        try{
+            user.setApiKey(UUID.randomUUID());
+            user.setAccountActive(1);
+            em.persist(user);
+            return user;
+        } catch (UnexpectedTypeException e) {
+            return null;
+        }
     }
 
     @Transactional(Transactional.TxType.REQUIRED)

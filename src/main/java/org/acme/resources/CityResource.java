@@ -71,8 +71,9 @@ public class CityResource {
     @Operation(summary = "Delete a city", description = "Enter cityId & the city creator API-key to the URL to delete a city")
     @Path("/{cityName}")
     public Response deleteCity(@PathParam("apiKey") UUID apiKey, @PathParam("cityName") String cityName) {
-        cityService.deleteByApiKey(apiKey, cityName);
-        return Response.noContent().build();
+        
+           return cityService.deleteByApiKey(apiKey, cityName);
+            
     }
 
     @Operation(summary = "Update a City", description = "Enter API-key to the URL. Enter cityName, country, description, imageUrl and population to the request body(JSON)")
@@ -147,10 +148,10 @@ public class CityResource {
 
     @GET
     @Operation(summary = "Show the ten most populated cities ", description = "Enter API-key to the URL to show the ten most populated cities")
-    @Path("/most-populace-cities")
+    @Path("/highest-populated-cities")
     public Response mostPopulaceCities(@PathParam("apiKey") UUID apiKey) {
         try {
-            return Response.ok(cityService.mostPopulaceCities(apiKey)).build();
+            return Response.ok(cityService.tenMostPopulaceCities(apiKey)).build();
         } catch (Exception e) {
             return Response.status(Response.Status.METHOD_NOT_ALLOWED)
                     .entity("You need an API key to see this information.")
@@ -160,10 +161,10 @@ public class CityResource {
 
     @GET
     @Operation(summary = "Show the ten least populated cities", description = "Enter API-key to the URL to show the ten least populated cities")
-    @Path("/least-populace-cities")
+    @Path("/lowest-populated-cities")
     public Response leastPopulaceCities(@PathParam("apiKey") UUID apiKey) {
         try {
-            return Response.ok(cityService.leastPopulaceCities(apiKey)).build();
+            return Response.ok(cityService.tenLeastPopulaceCities(apiKey)).build();
         } catch (Exception e) {
             return Response.status(Response.Status.METHOD_NOT_ALLOWED)
                     .entity("You need an API key to see this information.")
