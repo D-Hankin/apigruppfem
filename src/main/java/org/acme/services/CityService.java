@@ -13,6 +13,7 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.core.Response;
 
 @Transactional(Transactional.TxType.SUPPORTS)
 @ApplicationScoped
@@ -77,7 +78,7 @@ public class CityService {
     @SuppressWarnings("unchecked")
     public List<City> findCityByApiKey(UUID apiKey) {
 
-        Query query = em.createQuery("SELECT c FROM City c WHERE c.apiKey = :apiKey");
+        Query query = em.createQuery("SELECT c FROM City c WHERE c.apiKey = :apiKey", City.class);
         query.setParameter("apiKey", apiKey);
 
         return query.getResultList();
@@ -98,7 +99,7 @@ public class CityService {
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
-    public void deleteByApiKey(UUID apiKey, String cityName) {
+    public Response deleteByApiKey(UUID apiKey, String cityName) {
 
         Query selectQuery = em.createQuery("SELECT c FROM City c WHERE c.cityName = :cityName");
         selectQuery.setParameter("cityName", cityName);
@@ -111,7 +112,15 @@ public class CityService {
         Query query = em.createQuery("DELETE FROM City c WHERE c.apiKey = ?1 AND c.cityName = ?2");
         query.setParameter(1, apiKey);
         query.setParameter(2, cityName);
-        query.executeUpdate();
+        int result = query.executeUpdate();
+
+        if (result == 1) {
+            return Response.ok().entity(cityName + " has been deleted.").build();
+        } else {
+            return Response.status(Response.Status.METHOD_NOT_ALLOWED)
+            .entity("The city must be connected to your API key for you to delete it.")
+            .build();
+        }  
     }
 
     public City findCityByName(String cityName) {
@@ -153,35 +162,37 @@ public class CityService {
 
     }
 
-    public List<City> mostPopulaceCities(UUID apiKey) {
+    public List<City> tenMostPopulaceCities(UUID apiKey) {
         if (userService.findUserByApiKey(apiKey) != null
-                && userService.findUserByApiKey(apiKey).getAccountActive() == 1) {
-
-            return em.createQuery("SELECT * FROM City c ORDER BY c.population DESC LIMIT 10", City.class).getResultList();
+        && userService.findUserByApiKey(apiKey).getAccountActive() == 1) {
+            
+            return em.createQuery("SELECT c FROM City c ORDER BY c.population DESC", City.class)
+                     .setMaxResults(10)
+                     .getResultList();
 
         } else {
             return null;
         }
     }
 
-    @SuppressWarnings("unchecked")
     public List<City> tenLeastPopulaceCities(UUID apiKey) {
         if (userService.findUserByApiKey(apiKey) != null
                 && userService.findUserByApiKey(apiKey).getAccountActive() == 1) {
 
-            return em.createQuery("SELECT c FROM City c ORDER BY c.population LIMIT 10").getResultList();
+                    return em.createQuery("SELECT c FROM City c ORDER BY c.population", City.class)
+                    .setMaxResults(10)
+                    .getResultList();
 
         } else {
             return null;
         }
     }
 
-    @SuppressWarnings("unchecked")
     public List<City> randomCity(UUID apiKey) {
         if (userService.findUserByApiKey(apiKey) != null
                 && userService.findUserByApiKey(apiKey).getAccountActive() == 1) {
 
-            return em.createQuery("SELECT c FROM City c ORDER BY RANDOM() LIMIT 1").getResultList();
+            return em.createQuery("SELECT c FROM City c ORDER BY RANDOM() LIMIT 1", City.class).getResultList();
 
         } else {
             return null;

@@ -84,17 +84,8 @@ public class ReviewResource {
     @Operation(summary = "Delete a review", description = "Enter the review creators API-key and the reviewId to the URL to delete the review ")
     @Path("/{reviewId}")
     public Response deleteSingleReview(@PathParam("apiKey") UUID apiKey, @PathParam("reviewId") Long reviewId) {
-        try {
-            boolean success = reviewService.deleteSingleReviewByReviewId(apiKey, reviewId);
-            if (success == true) {
-                return Response.ok().entity("You have successfully deleted the review.").build();
-            } else {
-                return Response.status(Response.Status.METHOD_NOT_ALLOWED).entity("Delete not executed").build();
-            }
 
-        } catch (UnhandledException e) {
-            return Response.status(Response.Status.METHOD_NOT_ALLOWED).entity("Delete not executed").build();
-        }
+           return reviewService.deleteSingleReviewByReviewId(apiKey, reviewId);
     }
 
     @PATCH

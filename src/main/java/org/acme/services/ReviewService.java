@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import org.acme.model.City;
 import org.acme.model.Review;
-import org.jboss.resteasy.spi.UnhandledException;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -14,6 +13,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.core.Response;
 
 @Transactional(Transactional.TxType.SUPPORTS)
 @ApplicationScoped
@@ -90,23 +90,25 @@ public class ReviewService {
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
-    public boolean deleteSingleReviewByReviewId(UUID apiKey, Long reviewId) {
-        
-        boolean success = false;
+    public Response deleteSingleReviewByReviewId(UUID apiKey, Long reviewId) {
 
         Review review = findReviewByReviewId(reviewId);
-
-        try {
-            if (userService.findUserByApiKey(apiKey) == review.getUser() && userService.findUserByApiKey(apiKey).getAccountActive() == 1) {
-                em.createQuery("DELETE FROM Review r WHERE r.reviewId = :reviewId AND r.apiKey = :apiKey").setParameter("reviewId", reviewId)
-                    .setParameter("apiKey", apiKey).executeUpdate();
-                success = true;
-                System.out.println(success);
-            } 
-        } catch (UnhandledException e) {
-            return success;
+        
+        if (userService.findUserByApiKey(apiKey) == review.getUser() && userService.findUserByApiKey(apiKey).getAccountActive() == 1) {
+            int success = em.createQuery("DELETE FROM Review r WHERE r.reviewId = :reviewId AND r.apiKey = :apiKey").setParameter("reviewId", reviewId)
+                .setParameter("apiKey", apiKey).executeUpdate();
+            if (success == 1) {
+                return Response.ok().entity("The review has been deleted").build();
+            } else {
+                return Response.status(Response.Status.METHOD_NOT_ALLOWED)
+                .entity("The review must be connected to your API key for you to delete it.")
+                .build();
+            }
+        } else {
+            return Response.status(Response.Status.METHOD_NOT_ALLOWED)
+                .entity("The review must be connected to your API key for you to delete it.")
+                .build();
         }
-        return success;
     }
 
     public Review findReviewByReviewId(Long reviewId) {
