@@ -29,21 +29,21 @@ public class UserResource {
     @Inject
     UserService userService;
 
-    // Resurs för lättare testning av data. Inte menat att vara del av projektet
-    @GET
-    @Operation(summary = "Show all the current users", description = "Retrieve and show all the users currently in the database.")
-    @APIResponse(responseCode = "204", description = "No user currently in the database")
-    @APIResponse(responseCode = "200", description = "Funkar detta?!?!")
-    public Response getUsers() {
-        List<User> users = userService.findAll();
-        if (users.isEmpty()) {
-            return Response.noContent().build();
-        }
-        return Response.ok(users).build();
-    }
+    // **Resurs för lättare testning av data. Inte menat att vara tillgängligt för användaren.**
+    // @GET
+    // @Operation(summary = "Show all the current users", description = "Retrieve and show all the users currently in the database.")
+    // @APIResponse(responseCode = "204", description = "No user currently in the database")
+    // @APIResponse(responseCode = "200", description = "Funkar detta?!?!")
+    // public Response getUsers() {
+    //     List<User> users = userService.findAll();
+    //     if (users.isEmpty()) {
+    //         return Response.noContent().build();
+    //     }
+    //     return Response.ok(users).build();
+    // }
 
     @GET
-    @Operation(summary = "Show all current users", description = "Enter API-key to the URL to retrieve and show all the users currently in the database.\"")
+    @Operation(summary = "Find user by API key", description = "Enter API-key to the URL to retrieve and show all the users currently in the database.\"")
     @Path("/{apiKey}")
     public Response getUserById(@PathParam("apiKey") UUID apiKey) {
         User user = userService.findUserByApiKey(apiKey);
