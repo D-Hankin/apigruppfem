@@ -1,18 +1,64 @@
+# README: How to Clone, Open, and Run the Quarkus API using Visual Studio Code
+
+## Overview
+
+This README provides simplified instructions on how to clone, open, and run a Quarkus API from the "apigruppfem" repository on GitHub, created by user "D-Hankin", using Visual Studio Code (VS Code). The API contains information about cities, including reviews and ratings.
+
+### Developers
+
+- **D-Hankin**
+- **Kribbz0r**
+- **Code-Cadde**
+- **codejac95**
+
+### API Description
+
+The API contains information about cities, including reviews and ratings. Developers have the capability to perform the following actions:
+
+- **Add Cities:** Developers can add new cities to the API, providing information such as city name, description, and associated reviews and ratings.
+
+- **Edit Cities:** Existing city information, reviews, and ratings can be modified by developers to keep the data up-to-date.
+
+- **Remove Cities:** Developers can remove cities from the API, along with their associated reviews and ratings.
+
+- **Add Reviews:** Developers can add reviews for specific cities, including details such as comments and ratings.
+
+- **Edit Reviews:** Existing reviews can be edited by developers to reflect changes or updates.
+
+- **Remove Reviews:** Developers have the ability to remove reviews associated with cities.
+
+### Prerequisites
+
+Before you begin, make sure you have the following installed on your system:
+
+- Git: [https://git-scm.com/](https://git-scm.com/)
+- Docker: [https://www.docker.com/get-started](https://www.docker.com/get-started)
+- Visual Studio Code: [https://code.visualstudio.com/](https://code.visualstudio.com/)
+
+### Clone the Repository
+
+1. Open a terminal window.
+2. Navigate to the directory where you want to clone the repository.
+3. Run the following command to clone the repository: `git clone https://github.com/D-Hankin/apigruppfem.git`
+
+### Open the Project in Visual Studio Code
+
+1. Open Visual Studio Code.
+2. Click on the "File" menu and select "Open Folder."
+3. Navigate to the folder where you cloned the "apigruppfem" repository and select it.
+
+### Build and Run the Quarkus API
+
+1. **Ensure Docker is running on your machine before proceeding.**
+2. Open the terminal in VS Code.
+3. Navigate to the project directory using the following command: `cd apigruppfem`
+4. Run the Quarkus application: `./mvnw compile quarkus:dev` (This command starts the Quarkus development mode.)
+5. The Quarkus API should now be running.
+
+Now you have successfully cloned, opened, and run the Quarkus API from the "apigruppfem" repository using Visual Studio Code. Quarkus handles the Docker build step automatically, simplifying the process for you.
 
 
-
-För att köra applikationen måste du ha igång Docker och Quarkus.
-
-Du behöver Postman för att testa samtliga anrop mot appen.
-https://github.com/D-Hankin/apigruppfemFront ger dig en frontend som låter dig skapa och inaktivera en API-nyckel.
-
-Du når Quarkus dev UI på http://127.0.0.1:8080/q/dev-ui/ och Swagger på http://localhost:8080/q/swagger-ui/.
-
-
-
-
-
-*****Allt här under är konstigt fluff från Quarkus****** 
+*****Allt här under skapas automatiskt från Quarkus****** 
 
 # apigruppfem
 
