@@ -33,9 +33,7 @@ public class UserResource {
     @GET
     @Operation(summary = "Show all the current users", description = "Retrieve and show all the users currently in the database.")
     @APIResponse(responseCode = "204", description = "No user currently in the database")
-    @APIResponse(responseCode = "200", description = "Funkar detta?!?!"
-
-    )
+    @APIResponse(responseCode = "200", description = "Funkar detta?!?!")
     public Response getUsers() {
         List<User> users = userService.findAll();
         if (users.isEmpty()) {

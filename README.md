@@ -1,3 +1,19 @@
+
+
+
+För att köra applikationen måste du ha igång Docker och Quarkus.
+
+Du behöver Postman för att testa samtliga anrop mot appen.
+https://github.com/D-Hankin/apigruppfemFront ger dig en frontend som låter dig skapa och inaktivera en API-nyckel.
+
+Du når Quarkus dev UI på http://127.0.0.1:8080/q/dev-ui/ och Swagger på http://localhost:8080/q/swagger-ui/.
+
+
+
+
+
+*****Allt här under är konstigt fluff från Quarkus****** 
+
 # apigruppfem
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
