@@ -55,6 +55,12 @@ Before you begin, make sure you have the following installed on your system:
 4. Run the Quarkus application: `./mvnw compile quarkus:dev` (This command starts the Quarkus development mode.)
 5. The Quarkus API should now be running.
 
+### View API Endpoints in Swagger
+
+To explore and interact with the API endpoints, navigate to the Swagger UI. Open a web browser and go to [http://localhost:8080/q/swagger-ui/](http://localhost:8080/q/swagger-ui/).
+
+Here, you can view and test all the available endpoints of the Quarkus API using the Swagger interface.
+
 Now you have successfully cloned, opened, and run the Quarkus API from the "apigruppfem" repository using Visual Studio Code. Quarkus handles the Docker build step automatically, simplifying the process for you.
 
 
