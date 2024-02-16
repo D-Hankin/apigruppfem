@@ -27,7 +27,7 @@ The API contains information about cities, including reviews and ratings. Develo
 
 - **Remove Reviews:** Developers have the ability to remove reviews associated with cities.
 
-### Prerequisites
+### What you will need
 
 Before you begin, make sure you have the following installed on your system:
 
@@ -64,7 +64,7 @@ Here, you can view and test all the available endpoints of the Quarkus API using
 Now you have successfully cloned, opened, and run the Quarkus API from the "apigruppfem" repository using Visual Studio Code. Quarkus handles the Docker build step automatically, simplifying the process for you.
 
 
-*****Allt här under skapas automatiskt från Quarkus****** 
+*****Everything below is documentation created automaticallty by Quarkus****** 
 
 # apigruppfem
 
