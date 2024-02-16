@@ -2,7 +2,7 @@
 
 ## Overview
 
-This README provides simplified instructions on how to clone, open, and run a Quarkus API from the "apigruppfem" repository on GitHub, created by user "D-Hankin", using Visual Studio Code (VS Code). The API contains information about cities, including reviews and ratings.
+Here you can find instructions on how to clone, open, and run the Quarkus API from the "apigruppfem" repository on GitHub, created by user "D-Hankin", using Visual Studio Code. The API contains information about cities, including reviews and ratings.
 
 ### Developers
 
